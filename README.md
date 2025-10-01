@@ -24,7 +24,7 @@ Costs: $0
 
 *Week 9 (Phase II):* System Design & Implementation Progress Report
 
-*Week 12:* System Design & Implementation Progress Report
+*Week 12:* Authentication and basic workflow implemented, DB connected
 
 *Week 14:* Application Testing & Documentation Review
 
