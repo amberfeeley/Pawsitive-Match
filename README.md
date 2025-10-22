@@ -6,7 +6,7 @@ This project was created for educational purposes and is part of a learning exer
 ## Project Overview
 The primary users are families actively looking to adopt a pet.
 
-Secondary users will be people who are browsing pets and may decide to adopt.
+Secondary users will be shelter staff or admin who manage listings and approve applications.
 
 ## Resources & Costs:
 Technology Stack: C#/.NET, MySQL
@@ -24,7 +24,7 @@ Costs: $0
 
 *Week 9 (Phase II):* System Design & Implementation Progress Report
 
-*Week 12:* System Design & Implementation Progress Report
+*Week 12:* Authentication and basic workflow implemented, DB connected
 
 *Week 14:* Application Testing & Documentation Review
 
