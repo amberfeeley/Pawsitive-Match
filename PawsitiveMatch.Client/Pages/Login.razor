@@ -1,0 +1,20 @@
+@page "/login"
+
+<MudContainer MaxWidth="MaxWidth.Medium">
+
+    <!-- Page title and sample text that goes directly above login form -->  
+    <MudText Typo='Typo.h4'>User Login</MudText>
+    <MudText Typo="Typo.subtitle2">Want to make an appointment to meet your future fluffy best friend? Register with us to book an appointment now!</MudText>
+
+    <!-- User inputs details into form  -->
+    <MudForm>
+        <MudTextField @bind-Value="TextValue" Label="Username" Variant="Variant.Text"/>
+        <MudTextField @bind-Value="PasswordValue" Label="Password" Variant="Variant.Text"/>
+
+
+        <MudButton>Login</MudButton>
+
+    </MudForm>
+
+
+</MudContainer>
