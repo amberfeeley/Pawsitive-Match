@@ -41,6 +41,12 @@ namespace PawsitiveMatch.Client.Pages
                 EmailValue = string.Empty;
                 PasswordValue = string.Empty;
             }
+
+            /*
+            Future additions:
+            Add admin button to either below create account
+            or footer
+            */
         }
     }
 };

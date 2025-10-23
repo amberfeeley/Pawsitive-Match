@@ -57,6 +57,7 @@ namespace PawsitiveMatch.Client.Pages
 
                 EmailValue = string.Empty;
                 PasswordValue = string.Empty;
+                RepeatPasswordValue = string.Empty;
             }
         }
     }
