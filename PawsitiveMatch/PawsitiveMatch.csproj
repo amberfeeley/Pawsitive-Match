@@ -8,6 +8,7 @@
 
 
   <ItemGroup>
+    <PackageReference Include="MySql.Data" Version="9.5.0" />
     <ProjectReference Include="..\PawsitiveMatch.Client\PawsitiveMatch.Client.csproj" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="9.*" />
   </ItemGroup>

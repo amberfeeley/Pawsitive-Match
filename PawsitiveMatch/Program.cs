@@ -12,6 +12,7 @@ builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents()
     .AddInteractiveWebAssemblyComponents();
 
+// builder.Services.AddDbContext<DbConnection>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("ConnectionString")));
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
