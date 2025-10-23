@@ -8,11 +8,14 @@
 
     <!-- User inputs details into form  -->
     <MudForm>
-        <MudTextField @bind-Value="TextValue" Label="Username" Variant="Variant.Text"/>
-        <MudTextField @bind-Value="PasswordValue" Label="Password" Variant="Variant.Text"/>
+        <MudTextField @bind-Value="EmailValue" Label="Username" Variant="Variant.Text"/>
+        <MudTextField @bind-Value="PasswordValue" Label="Password" Variant="Variant.Text" InputType="InputType.Password"/>
 
+        <MudText Color="Color.Error" Class="mt-2">@ErrorMessage</MudText>
+        <MudText Color="Color.Success" Class="mt-2">@SuccessMessage</MudText>
 
-        <MudButton>Login</MudButton>
+        <MudButton OnClick="@(() => LoginSubmission())">Login</MudButton>
+        <MudNavLink Href="create-account" Match="NavLinkMatch.Prefix" Class="nav-link">Don't have an account? Click here!</MudNavLink>
 
     </MudForm>
 
