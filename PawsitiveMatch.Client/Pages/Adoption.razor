@@ -1,0 +1,19 @@
+@page "/adoption"
+
+<MudContainer MaxWidth="MaxWidth.Medium">
+
+    <!-- Page title and sample text that goes directly above login form -->  
+    <MudText Typo='Typo.h4'>Make An Adoption</MudText>
+    <MudText Typo="Typo.subtitle2">Fill out the information in the field to make an adoption!</MudText>
+
+    <!-- User inputs details into form  -->
+    <MudForm>
+        <MudTextField @bind-Value="EmailValue" Label="Email" Variant="Variant.Text"/>
+        <MudTextField @bind-Value="PasswordValue" Label="Password" Variant="Variant.Text"/>
+
+        <MudButton OnClick="@(() => LoginSubmission())">Login</MudButton>
+        
+    </MudForm>
+
+
+</MudContainer>
