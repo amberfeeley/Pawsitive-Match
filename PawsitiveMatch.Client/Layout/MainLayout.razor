@@ -1,16 +1,20 @@
 ﻿@inherits LayoutComponentBase
 
-<MudThemeProvider Theme="@_theme" IsDarkMode="_isDarkMode" />
+<MudThemeProvider Theme="@_theme" />
 <MudPopoverProvider />
 <MudDialogProvider />
 <MudSnackbarProvider />
 <MudLayout>
     <MudAppBar Elevation="1">
         <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
-        <MudText Typo="Typo.h5" Class="ml-3">Application</MudText>
+        <MudText Typo="Typo.h5" Class="ml-3">
+            <MudNavLink Href="/" Match="NavLinkMatch.Prefix">Pawsitive Match</MudNavLink>
+        </MudText>
         <MudSpacer />
-        <MudIconButton Icon="@(DarkLightModeButtonIcon)" Color="Color.Inherit" OnClick="@DarkModeToggle" />
-        <MudIconButton Icon="@Icons.Material.Filled.MoreVert" Color="Color.Inherit" Edge="Edge.End" />
+        <MudNavLink Href="login" Match="NavLinkMatch.Prefix" Class="nav-link">Login</MudNavLink>
+        <MudNavLink Href="account" Match="NavLinkMatch.Prefix" Class="nav-link">My Account</MudNavLink>
+        <MudNavLink Href="adoption" Match="NavLinkMatch.Prefix" Class="nav-link">Adoption</MudNavLink>
+
     </MudAppBar>
     <MudDrawer id="nav-drawer" @bind-Open="_drawerOpen" ClipMode="DrawerClipMode.Always" Elevation="2">
         <NavMenu />
@@ -26,3 +30,17 @@
     <a href="." class="reload">Reload</a>
     <span class="dismiss">🗙</span>
 </div>
+
+<style>
+    .nav-link {
+        display: inline-block;
+        align-items: center;
+        text-align: center;
+        width: auto;
+        height: auto;
+        display: inline flex;
+        padding: 0;
+        min-width: 0;
+        color: var(--mud-pallete-primary-text)
+    }
+</style>

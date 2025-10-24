@@ -1,3 +1,4 @@
+using System.Runtime.InteropServices;
 using MudBlazor;
 
 namespace PawsitiveMatch.Client.Layout
@@ -30,7 +31,9 @@ namespace PawsitiveMatch.Client.Layout
             _isDarkMode = !_isDarkMode;
         }
 
+
         private readonly PaletteLight _lightPalette = new()
+
         {
             Black = "#110e2d",
             AppbarText = "#424242",
@@ -39,6 +42,7 @@ namespace PawsitiveMatch.Client.Layout
             GrayLight = "#e8e8e8",
             GrayLighter = "#f9f9f9",
         };
+
 
         private readonly PaletteDark _darkPalette = new()
         {

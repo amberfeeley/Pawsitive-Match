@@ -1,0 +1,28 @@
+@page "/create-account"
+
+<MudContainer MaxWidth="MaxWidth.Medium">
+
+    <!-- Sets all text and buttons within a MudPaper -->
+    <MudPaper Class="pa-16 ma-2" Elevation="3">
+
+        <!-- Page title and sample text that goes directly above login form -->  
+        <MudText Typo='Typo.h4'>Create Account</MudText>
+        <MudText Typo="Typo.subtitle2">Don't have an account? Make one now!</MudText>
+
+        <!-- User inputs details into form  -->
+        <MudForm>
+            <MudTextField @bind-Value="FirstName" Label="First Name" Variant="Variant.Text"/>
+            <MudTextField @bind-Value="LastName" Label="Last Name" Variant="Variant.Text"/>
+            <MudTextField @bind-Value="EmailValue" Label="Email" Variant="Variant.Text"/>
+            <MudTextField @bind-Value="PasswordValue" Label="Password" Variant="Variant.Text" InputType="InputType.Password"/>
+            <MudTextField @bind-Value="RepeatPasswordValue" Label="Re-enter Password" Variant="Variant.Text" InputType="InputType.Password"/>
+
+            <MudText Color="Color.Error" Class="mt-2">@ErrorMessage</MudText>
+            <MudText Color="Color.Success" Class="mt-2">@SuccessMessage</MudText>
+
+            <MudButton OnClick="@(() => AccountSubmission())">Create Account</MudButton>
+        </MudForm>
+    </MudPaper>
+
+
+</MudContainer>
