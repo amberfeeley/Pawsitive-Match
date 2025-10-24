@@ -13,4 +13,5 @@ public class Pet {
     public string Breed { get; set; } = string.Empty;
     public int? OwnerId { get; set; }
     public bool Adopted { get; set; }
+    public List<AdoptionForm> AdoptionForms  { get; set; } = [];
 }
