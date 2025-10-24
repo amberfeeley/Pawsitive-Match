@@ -4,6 +4,9 @@ namespace PawsitiveMatch.Client.Pages
     public partial class CreateAccount
     {
         // Test variables
+        private string FirstName { get; set; } = string.Empty;
+        private string LastName { get; set; } = string.Empty;
+
         private string EmailValue { get; set; } = string.Empty;
         private string PasswordValue { get; set; } = string.Empty;
         private string RepeatPasswordValue { get; set; } = string.Empty;
@@ -15,9 +18,24 @@ namespace PawsitiveMatch.Client.Pages
         private void AccountSubmission()
         {
             // Sends error if all fields are empty
-            if (EmailValue == string.Empty && PasswordValue == string.Empty && RepeatPasswordValue == string.Empty)
+            if (EmailValue == string.Empty && PasswordValue == string.Empty && RepeatPasswordValue == string.Empty
+                && FirstName == string.Empty && LastName == string.Empty)
             {
                 ErrorMessage = "All fields must be filled out to login.";
+                return;
+            }
+
+            // Sends error message if first name field is blank
+            else if (FirstName == string.Empty)
+            {
+                ErrorMessage = "The First Name field cannot be blank on submission.";
+                return;
+            }
+
+            // Sends error message if last name field is blank
+            else if (LastName == string.Empty)
+            {
+                ErrorMessage = "The Last Name field cannot be blank upon submission.";
                 return;
             }
 
@@ -55,6 +73,8 @@ namespace PawsitiveMatch.Client.Pages
                 ErrorMessage = string.Empty;
                 SuccessMessage = "Login successful!";
 
+                FirstName = string.Empty;
+                LastName = string.Empty;
                 EmailValue = string.Empty;
                 PasswordValue = string.Empty;
                 RepeatPasswordValue = string.Empty;

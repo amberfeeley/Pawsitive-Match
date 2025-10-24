@@ -46,6 +46,7 @@ namespace PawsitiveMatch.Client.Pages
             Future additions:
             Add admin button to either below create account
             or footer
+            Add mudpaper into the form
             */
         }
     }

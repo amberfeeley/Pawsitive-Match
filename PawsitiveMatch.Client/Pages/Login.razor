@@ -2,22 +2,27 @@
 
 <MudContainer MaxWidth="MaxWidth.Medium">
 
-    <!-- Page title and sample text that goes directly above login form -->  
-    <MudText Typo='Typo.h4'>User Login</MudText>
-    <MudText Typo="Typo.subtitle2">Want to make an appointment to meet your future fluffy best friend? Register with us to book an appointment now!</MudText>
+    <!-- Sets all text and buttons within a MudPaper -->
+    <MudPaper Class="pa-16 ma-2" Elevation="3">
 
-    <!-- User inputs details into form  -->
-    <MudForm>
-        <MudTextField @bind-Value="EmailValue" Label="Username" Variant="Variant.Text"/>
-        <MudTextField @bind-Value="PasswordValue" Label="Password" Variant="Variant.Text" InputType="InputType.Password"/>
+        <!-- Page title and sample text that goes directly above login form -->  
+        <MudText Typo='Typo.h4'>User Login</MudText>
+        <MudText Typo="Typo.subtitle2">Want to make an appointment to meet your future fluffy best friend? Register with us to book an appointment now!</MudText>
 
-        <MudText Color="Color.Error" Class="mt-2">@ErrorMessage</MudText>
-        <MudText Color="Color.Success" Class="mt-2">@SuccessMessage</MudText>
+        <!-- User inputs details into form  -->
+        
+        <MudForm>
+            <MudTextField @bind-Value="EmailValue" Label="Username" Variant="Variant.Text"/>
+            <MudTextField @bind-Value="PasswordValue" Label="Password" Variant="Variant.Text" InputType="InputType.Password"/>
 
-        <MudButton OnClick="@(() => LoginSubmission())">Login</MudButton>
-        <MudNavLink Href="create-account" Match="NavLinkMatch.Prefix" Class="nav-link">Don't have an account? Click here!</MudNavLink>
+            <MudText Color="Color.Error" Class="mt-2">@ErrorMessage</MudText>
+            <MudText Color="Color.Success" Class="mt-2">@SuccessMessage</MudText>
 
-    </MudForm>
+            <MudButton OnClick="@(() => LoginSubmission())">Login</MudButton>
+            <MudNavLink Href="create-account" Match="NavLinkMatch.Prefix" Class="nav-link">Don't have an account? Click here!</MudNavLink>
+
+        </MudForm>
+    </MudPaper>
 
 
 </MudContainer>
