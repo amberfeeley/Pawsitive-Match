@@ -10,14 +10,5 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "PawsitiveMatch.Client": {
-      "commandName": "Project",
-      "dotnetRunMessages": true,
-      "launchBrowser": true,
-      "applicationUrl": "https://localhost:7018",
-      "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
-      }
-    }
   }
 }
