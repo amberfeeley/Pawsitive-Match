@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-public class Admin {
+public class User {
     public int Id { get; set; }
     [Required]
     [MaxLength(50)]
@@ -8,6 +8,7 @@ public class Admin {
     [Required]
     [MaxLength(50)]
     public string LastName { get; set; } = string.Empty;
+
     [Required]
     [EmailAddress]
     [MaxLength(100)]
@@ -15,5 +16,7 @@ public class Admin {
     [Required]
     [MaxLength(255)]
     public string Password { get; set; } = string.Empty;
-    public List<AdoptionForm> AdoptionForms { get; set; } = [];
+    public List<Pet> AdoptedPets { get; set; } = [];
+
+    public List<AdoptionForm> AdoptionForms  { get; set; } = [];
 }
