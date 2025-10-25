@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace PawsitiveMatch.Models
+namespace PawsitiveMatch.SharedModels
 {
     public class Pet
     {

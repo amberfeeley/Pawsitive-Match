@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using PawsitiveMatch.Models;
+using PawsitiveMatch.SharedModels;
 
 namespace PawsitiveMatch.Authentication
 {

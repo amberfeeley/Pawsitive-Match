@@ -1,5 +1,5 @@
 using System.Net.Http.Json;
-using PawsitiveMatch.Client.Dto;
+using PawsitiveMatch.SharedModels;
 
 namespace PawsitiveMatch.Client.Services
 {
@@ -16,7 +16,13 @@ namespace PawsitiveMatch.Client.Services
         {
             try
             {
-                var user = new RegisterUserDto(email, password, firstName, lastName);
+                var user = new User
+                {
+                    Email = email,
+                    Password = password,
+                    FirstName = firstName,
+                    LastName = lastName
+                };
                 var response = await _http.PostAsJsonAsync("api/auth/register", user);
                 return response.IsSuccessStatusCode;
             }
@@ -27,11 +33,16 @@ namespace PawsitiveMatch.Client.Services
             }
         }
 
-        public async Task<UserDto?> LoginAsync(LoginDto dto)
+        public async Task<User?> LoginAsync(string email, string password)
         {
-            var response = await _http.PostAsJsonAsync("api/auth/login", dto);
+            var user = new User
+            {
+                Email = email,
+                Password = password
+            };
+            var response = await _http.PostAsJsonAsync("api/auth/login", user);
             return response.IsSuccessStatusCode
-                ? await response.Content.ReadFromJsonAsync<UserDto>()
+                ? await response.Content.ReadFromJsonAsync<User>()
                 : null;
         }
     }
