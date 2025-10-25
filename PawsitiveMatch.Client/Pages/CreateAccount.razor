@@ -1,4 +1,7 @@
 @page "/create-account"
+@using PawsitiveMatch.Client.Services
+@inject ApiService Api
+@inject NavigationManager Nav
 
 <MudContainer MaxWidth="MaxWidth.Medium">
 
@@ -10,17 +13,32 @@
         <MudText Typo="Typo.subtitle2">Don't have an account? Make one now!</MudText>
 
         <!-- User inputs details into form  -->
-        <MudForm>
-            <MudTextField @bind-Value="FirstName" Label="First Name" Variant="Variant.Text"/>
-            <MudTextField @bind-Value="LastName" Label="Last Name" Variant="Variant.Text"/>
-            <MudTextField @bind-Value="EmailValue" Label="Email" Variant="Variant.Text"/>
-            <MudTextField @bind-Value="PasswordValue" Label="Password" Variant="Variant.Text" InputType="InputType.Password"/>
-            <MudTextField @bind-Value="RepeatPasswordValue" Label="Re-enter Password" Variant="Variant.Text" InputType="InputType.Password"/>
+        <MudForm @ref="form">
+            <MudTextField @bind-Value="FirstName"
+                          Label="First Name" Variant="Variant.Text" Required="true"/>
+            <MudTextField @bind-Value="LastName"
+                          Label="Last Name"
+                          Variant="Variant.Text"
+                          Required="true"/>
+            <MudTextField @bind-Value="EmailValue" 
+                          Label="Email"
+                          Variant="Variant.Text"
+                          Required="true"/>
+            <MudTextField @bind-Value="PasswordValue"
+                          Label="Password"
+                          Variant="Variant.Text"
+                          InputType="InputType.Password"
+                          Required="true"/>
+            <MudTextField @bind-Value="RepeatPasswordValue"
+                          Label="Re-enter Password"
+                          Variant="Variant.Text"
+                          InputType="InputType.Password"
+                          Required="true"
+                          Validation="@(new Func<string, string?>(PasswordMatch))"/>
 
             <MudText Color="Color.Error" Class="mt-2">@ErrorMessage</MudText>
-            <MudText Color="Color.Success" Class="mt-2">@SuccessMessage</MudText>
 
-            <MudButton OnClick="@(() => AccountSubmission())">Create Account</MudButton>
+            <MudButton OnClick="CreateUserAccount">Create Account</MudButton>
         </MudForm>
     </MudPaper>
 

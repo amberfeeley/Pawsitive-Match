@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using PawsitiveMatch.Models;
 public class AppDbContext : DbContext
 {
     public AppDbContext(DbContextOptions<AppDbContext> options) 
