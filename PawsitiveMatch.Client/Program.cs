@@ -6,7 +6,7 @@ var builder = WebAssemblyHostBuilder.CreateDefault(args);
 
 builder.Services.AddScoped(sp => new HttpClient
 {
-    BaseAddress = new Uri("http://localhost:5004/")
+    BaseAddress = new Uri("https://localhost:5001/")
 });
 
 builder.Services.AddScoped<ApiService>();
