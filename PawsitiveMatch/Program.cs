@@ -33,6 +33,12 @@ builder.Services.AddCors(options =>
     });
 });
 
+builder.Services.AddScoped(sp => new HttpClient
+{
+    BaseAddress = new Uri("https://localhost:5001/")
+});
+builder.Services.AddScoped<PawsitiveMatch.Client.Services.ApiService>();
+
 var app = builder.Build();
 
 using (var scope = app.Services.CreateScope())
