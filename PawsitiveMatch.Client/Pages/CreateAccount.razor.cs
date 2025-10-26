@@ -1,83 +1,42 @@
+using Microsoft.AspNetCore.Components;
+using MudBlazor;
+using PawsitiveMatch.Client.Services;
+
 namespace PawsitiveMatch.Client.Pages
 {
     // Partial class definition needed for the Login page to detect the code
     public partial class CreateAccount
     {
-        // Test variables
-        private string FirstName { get; set; } = string.Empty;
-        private string LastName { get; set; } = string.Empty;
+        private string FirstName = string.Empty;
+        private string LastName = string.Empty;
+        private string EmailValue = string.Empty;
+        private string PasswordValue = string.Empty;
+        private string RepeatPasswordValue = string.Empty;
+        private string ErrorMessage = string.Empty;
+        private bool success;
+        private MudForm? form;
 
-        private string EmailValue { get; set; } = string.Empty;
-        private string PasswordValue { get; set; } = string.Empty;
-        private string RepeatPasswordValue { get; set; } = string.Empty;
-        private string ErrorMessage { get; set; } = string.Empty;
-        private string SuccessMessage { get; set; } = string.Empty;
-
-
-        // Sample code for account submission. Just clears the strings for now.
-        private void AccountSubmission()
+        private string? PasswordMatch(string arg)
         {
-            // Sends error if all fields are empty
-            if (EmailValue == string.Empty && PasswordValue == string.Empty && RepeatPasswordValue == string.Empty
-                && FirstName == string.Empty && LastName == string.Empty)
-            {
-                ErrorMessage = "All fields must be filled out to login.";
-                return;
-            }
+            if (PasswordValue != arg)
+                return "Passwords don't match";
+            return null;
+        }
+            
+        private async Task CreateUserAccount()
+        {
+            ErrorMessage = string.Empty;
 
-            // Sends error message if first name field is blank
-            else if (FirstName == string.Empty)
+            if (form != null && Api != null)
             {
-                ErrorMessage = "The First Name field cannot be blank on submission.";
-                return;
-            }
+                await form.Validate();
 
-            // Sends error message if last name field is blank
-            else if (LastName == string.Empty)
-            {
-                ErrorMessage = "The Last Name field cannot be blank upon submission.";
-                return;
-            }
-
-            // Sends error message if email field is blank
-            else if (EmailValue == string.Empty)
-            {
-                ErrorMessage = "The Email field cannot be blank on submission.";
-                return;
-            }
-
-            // Sends error message if password field is blank
-            else if (PasswordValue == string.Empty)
-            {
-                ErrorMessage = "The Password field cannot be blank upon submission.";
-                return;
-            }
-
-            // Sends error message if re-password field is blank
-            else if (RepeatPasswordValue == string.Empty)
-            {
-                ErrorMessage = "The Re-enter Password field cannot be blank upon submission.";
-                return;
-            }
-
-            // Sends error message if re-password field is blank
-            else if (PasswordValue != RepeatPasswordValue)
-            {
-                ErrorMessage = "The Password fields do not match. Please re-enter them and submit again.";
-                return;
-            }
-
-            // Clears email and password field upon button press. Temporary code.
-            else
-            {
-                ErrorMessage = string.Empty;
-                SuccessMessage = "Login successful!";
-
-                FirstName = string.Empty;
-                LastName = string.Empty;
-                EmailValue = string.Empty;
-                PasswordValue = string.Empty;
-                RepeatPasswordValue = string.Empty;
+                if (await Api.RegisterAsync(EmailValue, PasswordValue, FirstName, LastName))
+                {
+                    Nav.NavigateTo("/");
+                }
+                else
+                    ErrorMessage = "Email already exists!";
             }
         }
     }

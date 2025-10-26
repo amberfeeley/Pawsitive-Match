@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using MudBlazor.Services;
-using PawsitiveMatch.Client.Pages;
+using PawsitiveMatch.Authentication;
 using PawsitiveMatch.Components;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -18,6 +18,21 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseMySql(connectionString, new MySqlServerVersion(new Version(8, 0, 36)))
 );
+
+builder.Services.AddScoped<AuthService>();
+builder.Services.AddControllers();
+builder.Services.AddAuthorizationCore();
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowBlazorClient", policy =>
+    {
+        policy.AllowAnyOrigin()
+              .AllowAnyHeader()
+              .AllowAnyMethod();
+    });
+});
+
 var app = builder.Build();
 
 using (var scope = app.Services.CreateScope())
@@ -38,11 +53,13 @@ else
     app.UseHsts();
 }
 
+app.UseRouting();
+app.UseCors("AllowBlazorClient");
 app.UseHttpsRedirection();
-
 
 app.UseAntiforgery();
 
+app.MapControllers();
 app.MapStaticAssets();
 app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode()
