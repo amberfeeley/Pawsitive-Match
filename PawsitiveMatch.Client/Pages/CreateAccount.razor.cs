@@ -13,6 +13,7 @@ namespace PawsitiveMatch.Client.Pages
         private string PasswordValue = string.Empty;
         private string RepeatPasswordValue = string.Empty;
         private string ErrorMessage = string.Empty;
+        private bool success;
         private MudForm? form;
 
         private string? PasswordMatch(string arg)
@@ -21,7 +22,7 @@ namespace PawsitiveMatch.Client.Pages
                 return "Passwords don't match";
             return null;
         }
-        
+            
         private async Task CreateUserAccount()
         {
             ErrorMessage = string.Empty;

@@ -13,7 +13,7 @@
         <MudText Typo="Typo.subtitle2">Don't have an account? Make one now!</MudText>
 
         <!-- User inputs details into form  -->
-        <MudForm @ref="form">
+        <MudForm @ref="form" @bind-IsValid="@success">
             <MudTextField @bind-Value="FirstName"
                           Label="First Name" Variant="Variant.Text" Required="true"/>
             <MudTextField @bind-Value="LastName"
@@ -38,7 +38,7 @@
 
             <MudText Color="Color.Error" Class="mt-2">@ErrorMessage</MudText>
 
-            <MudButton OnClick="CreateUserAccount">Create Account</MudButton>
+            <MudButton OnClick="CreateUserAccount" Disabled="@(!success)">Create Account</MudButton>
         </MudForm>
     </MudPaper>
 
