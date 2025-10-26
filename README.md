@@ -3,6 +3,12 @@
 
 This project was created for educational purposes and is part of a learning exercise / school assignment. It may not be production-ready and is intended for personal or academic exploration only.
 
+# Run Instructions
+1. Ensure that your MySQL is running with default port/username/password.
+2. Open backend project in terminal (`cd PawsitiveMatch`)
+3. Run command `dotnet run` to start application.
+4. Website is hosted on `https://localhost:5001/`
+   
 ## Project Overview
 The primary users are families actively looking to adopt a pet.
 
