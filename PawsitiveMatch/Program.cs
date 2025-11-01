@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using MudBlazor.Services;
 using PawsitiveMatch.Authentication;
 using PawsitiveMatch.Components;
+using PawsitiveMatch.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,6 +21,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 );
 
 builder.Services.AddScoped<AuthService>();
+builder.Services.AddScoped<StateService>();
 builder.Services.AddControllers();
 builder.Services.AddAuthorizationCore();
 

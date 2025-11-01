@@ -1,4 +1,8 @@
 @page "/login"
+@using PawsitiveMatch.Client.Services
+@using PawsitiveMatch.Services
+@inject ApiService Api
+@inject StateService State
 
 <MudContainer MaxWidth="MaxWidth.Medium">
 
@@ -11,14 +15,14 @@
 
         <!-- User inputs details into form  -->
         
-        <MudForm>
-            <MudTextField @bind-Value="EmailValue" Label="Email" Variant="Variant.Text"/>
-            <MudTextField @bind-Value="PasswordValue" Label="Password" Variant="Variant.Text" InputType="InputType.Password"/>
+        <MudForm @ref="form" @bind-IsValid="@success">
+            <MudTextField @bind-Value="EmailValue" Label="Email" Required="true" Variant="Variant.Text"/>
+            <MudTextField @bind-Value="PasswordValue" Label="Password" Required="true" Variant="Variant.Text" InputType="InputType.Password"/>
 
             <MudText Color="Color.Error" Class="mt-2">@ErrorMessage</MudText>
             <MudText Color="Color.Success" Class="mt-2">@SuccessMessage</MudText>
 
-            <MudButton OnClick="@(() => LoginSubmission())">Login</MudButton>
+            <MudButton OnClick="@(() => LoginSubmission())" Disabled="@(!success)">Login</MudButton>
             <MudNavLink Href="create-account" Match="NavLinkMatch.Prefix" Class="nav-link">Don't have an account? Click here!</MudNavLink>
 
         </MudForm>

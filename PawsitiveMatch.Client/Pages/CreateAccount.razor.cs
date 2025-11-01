@@ -31,7 +31,7 @@ namespace PawsitiveMatch.Client.Pages
             {
                 await form.Validate();
 
-                if (await Api.RegisterAsync(EmailValue, PasswordValue, FirstName, LastName))
+                if (form.IsValid && await Api.RegisterAsync(EmailValue, PasswordValue, FirstName, LastName))
                 {
                     Nav.NavigateTo("/");
                 }

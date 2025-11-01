@@ -37,7 +37,10 @@ namespace PawsitiveMatch.Authentication
         public async Task<User?> LoginUserAsync(string email, string password)
         {
             var user = await _db.User.FirstOrDefaultAsync(u => u.Email == email);
-            if (user == null) return null;
+            if (user == null)
+            {
+                return null;
+            }
 
             var result = _hasher.VerifyHashedPassword(null, user.Password, password);
             return result == PasswordVerificationResult.Success ? user : null;

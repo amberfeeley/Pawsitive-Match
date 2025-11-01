@@ -26,7 +26,7 @@ namespace PawsitiveMatch.Client.Services
                 var response = await _http.PostAsJsonAsync("api/auth/register", user);
                 return response.IsSuccessStatusCode;
             }
-            catch (HttpRequestException ex)
+            catch (Exception ex)
             {
                 Console.Error.WriteLine($"RegisterAsync failed: {ex.Message}");
                 return false;
@@ -35,15 +35,31 @@ namespace PawsitiveMatch.Client.Services
 
         public async Task<User?> LoginAsync(string email, string password)
         {
-            var user = new User
+            try
             {
-                Email = email,
-                Password = password
-            };
-            var response = await _http.PostAsJsonAsync("api/auth/login", user);
-            return response.IsSuccessStatusCode
-                ? await response.Content.ReadFromJsonAsync<User>()
-                : null;
+                var loginRequest = new LoginRequestDto
+                {
+                    Email = email,
+                    Password = password
+                };
+
+                var response = await _http.PostAsJsonAsync("api/auth/login", loginRequest);
+
+                return response.IsSuccessStatusCode
+                    ? await response.Content.ReadFromJsonAsync<User>()
+                    : null;
+            }
+            catch (Exception ex)
+            {
+                Console.Error.WriteLine($"LoginAsync failed: {ex.Message}");
+                return null;
+            }
         }
+    }
+
+    internal class LoginRequestDto
+    {
+        public string Email { get; set; } = string.Empty;
+        public string Password { get; set; } = string.Empty;
     }
 }
