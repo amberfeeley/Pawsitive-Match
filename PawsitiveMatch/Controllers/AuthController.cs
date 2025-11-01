@@ -26,16 +26,12 @@ namespace PawsitiveMatch.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginRequest loginRequest)
         {
-
-            Console.WriteLine($"Attempting login for {loginRequest.Email}");
             var dbUser = await _auth.LoginUserAsync(loginRequest.Email, loginRequest.Password);
             if (dbUser == null)
             {
-                Console.WriteLine("Login failed: invalid credentials");
                 return Unauthorized();
             }
-
-            Console.WriteLine("Login succeeded!");
+            
             dbUser.Password = string.Empty;
             return Ok(dbUser);
         }

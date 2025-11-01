@@ -3,6 +3,7 @@
 @using PawsitiveMatch.Services
 @inject ApiService Api
 @inject StateService State
+@inject NavigationManager Nav
 
 <MudContainer MaxWidth="MaxWidth.Medium">
 
@@ -20,7 +21,6 @@
             <MudTextField @bind-Value="PasswordValue" Label="Password" Required="true" Variant="Variant.Text" InputType="InputType.Password"/>
 
             <MudText Color="Color.Error" Class="mt-2">@ErrorMessage</MudText>
-            <MudText Color="Color.Success" Class="mt-2">@SuccessMessage</MudText>
 
             <MudButton OnClick="@(() => LoginSubmission())" Disabled="@(!success)">Login</MudButton>
             <MudNavLink Href="create-account" Match="NavLinkMatch.Prefix" Class="nav-link">Don't have an account? Click here!</MudNavLink>

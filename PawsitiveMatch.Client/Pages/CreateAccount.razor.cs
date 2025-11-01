@@ -4,7 +4,6 @@ using PawsitiveMatch.Client.Services;
 
 namespace PawsitiveMatch.Client.Pages
 {
-    // Partial class definition needed for the Login page to detect the code
     public partial class CreateAccount
     {
         private string FirstName = string.Empty;
