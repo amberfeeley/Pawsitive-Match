@@ -12,6 +12,7 @@ builder.Services.AddScoped(sp => new HttpClient
 
 builder.Services.AddScoped<ApiService>();
 builder.Services.AddScoped<StateService>();
+builder.Services.AddScoped<PetService>();
 
 builder.Services.AddMudServices();
 

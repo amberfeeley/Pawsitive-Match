@@ -1,0 +1,31 @@
+@page "/pets/{PetTypeString}"
+@using PawsitiveMatch.Client.Services
+@inject NavigationManager Nav
+
+
+<MudText>@PetType</MudText>
+<MudContainer MaxWidth="MaxWidth.Large">
+    <MudText Typo="Typo.h4">@PetType for Adoption</MudText>
+
+    <MudGrid>
+        @if (Pets == null)
+        {
+            <MudProgressCircular Indeterminate="true" />
+        }
+        else
+        {
+            @foreach (var pet in Pets)
+            {
+                <MudItem xs="12" sm="6" md="4">
+                    <MudCard>
+                        @* <MudCardMedia Image="@pet.ImageUrl" Height="200" /> *@
+                        <MudCardContent>
+                            <MudText Typo="Typo.h6">@pet.Name</MudText>
+                            <MudText>@pet.Breed</MudText>
+                        </MudCardContent>
+                    </MudCard>
+                </MudItem>
+            }
+        }
+    </MudGrid>
+</MudContainer>

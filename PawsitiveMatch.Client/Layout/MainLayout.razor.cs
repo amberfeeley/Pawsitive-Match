@@ -36,7 +36,7 @@ namespace PawsitiveMatch.Client.Layout
 
         {
             Black = "#110e2d",
-            AppbarText = "#424242",
+            AppbarText = "#335ca2ff",
             AppbarBackground = "rgba(255,255,255,0.8)",
             DrawerBackground = "#ffffff",
             GrayLight = "#e8e8e8",

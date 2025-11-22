@@ -1,8 +1,10 @@
-﻿
+﻿@using SharedModels.Models
+
 <MudNavMenu>
-    <MudNavLink Href="home" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Home">Home</MudNavLink>
-    <MudNavLink Href="counter" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.Add">Counter</MudNavLink>
-    <MudNavLink Href="weather" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.List">Weather</MudNavLink>
+    <MudNavLink Href="/" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Home">Home</MudNavLink>
+    <MudNavLink Href="@($"pets/{PetType.Cat}")" Match="NavLinkMatch.Prefix" Icon="@Client.Components.CustomIcons.Cat">Cats</MudNavLink>
+    <MudNavLink Href="@($"pets/{PetType.Dog}")" Match="NavLinkMatch.Prefix" Icon="@Client.Components.CustomIcons.Dog">Dogs</MudNavLink>
+    <MudNavLink Href="@($"pets/{PetType.Other}")" Match="NavLinkMatch.Prefix" Icon="@Client.Components.CustomIcons.OtherPet">Other Pets</MudNavLink>
 </MudNavMenu>
 
-
+@* TODO: Fix Icon SVGs *@

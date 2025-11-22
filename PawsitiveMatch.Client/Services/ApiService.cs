@@ -1,5 +1,5 @@
 using System.Net.Http.Json;
-using PawsitiveMatch.SharedModels;
+using PawsitiveMatch.SharedModels.Models;
 
 namespace PawsitiveMatch.Client.Services
 {
