@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace PawsitiveMatch.SharedModels
+namespace PawsitiveMatch.SharedModels.Models
 {
     public class User
     {

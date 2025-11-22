@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Identity.Data;
 using Microsoft.AspNetCore.Mvc;
 using PawsitiveMatch.Authentication;
-using PawsitiveMatch.SharedModels;
+using PawsitiveMatch.SharedModels.Models;
 
 namespace PawsitiveMatch.Controllers
 {

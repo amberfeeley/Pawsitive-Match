@@ -1,4 +1,4 @@
-using PawsitiveMatch.SharedModels;
+using PawsitiveMatch.SharedModels.Models;
 
 namespace PawsitiveMatch.Services
 {

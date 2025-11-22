@@ -1,6 +1,4 @@
-using Microsoft.AspNetCore.Components;
 using MudBlazor;
-using PawsitiveMatch.Client.Services;
 
 namespace PawsitiveMatch.Client.Pages
 {

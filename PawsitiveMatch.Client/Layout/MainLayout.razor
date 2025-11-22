@@ -4,26 +4,28 @@
 <MudPopoverProvider />
 <MudDialogProvider />
 <MudSnackbarProvider />
-<MudLayout>
-    <MudAppBar Elevation="1">
-        <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
-        <MudText Typo="Typo.h5" Class="ml-3">
-            <MudNavLink Href="/" Match="NavLinkMatch.Prefix">Pawsitive Match</MudNavLink>
-        </MudText>
-        <MudSpacer />
-        <MudNavLink Href="login" Match="NavLinkMatch.Prefix" Class="nav-link">Login</MudNavLink>
-        <MudNavLink Href="account" Match="NavLinkMatch.Prefix" Class="nav-link">My Account</MudNavLink>
-        <MudNavLink Href="adoption" Match="NavLinkMatch.Prefix" Class="nav-link">Adoption</MudNavLink>
 
-    </MudAppBar>
-    <MudDrawer id="nav-drawer" @bind-Open="_drawerOpen" ClipMode="DrawerClipMode.Always" Elevation="2">
-        <NavMenu />
-    </MudDrawer>
-    <MudMainContent Class="pt-16 pa-4">
-        @Body
-    </MudMainContent>
-</MudLayout>
+<div class="app-background">
+    <MudLayout>
+        <MudAppBar Elevation="1">
+            <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
+            
+            <MudButton Class="nav-link">Pawsitive Match</MudButton>
 
+            <MudSpacer />
+
+            <MudButton Class="nav-link">Login</MudButton>
+            <MudButton Class="nav-link">My Account</MudButton>
+
+        </MudAppBar>
+        <MudDrawer id="nav-drawer" @bind-Open="_drawerOpen" ClipMode="DrawerClipMode.Always" Elevation="2">
+            <NavMenu />
+        </MudDrawer>
+        <MudMainContent Class="pt-16 pa-4">
+            @Body
+        </MudMainContent>
+    </MudLayout>
+</div>
 
 <div id="blazor-error-ui" data-nosnippet>
     An unhandled error has occurred.
@@ -33,14 +35,13 @@
 
 <style>
     .nav-link {
-        display: inline-block;
-        align-items: center;
-        text-align: center;
-        width: auto;
-        height: auto;
-        display: inline flex;
-        padding: 0;
-        min-width: 0;
-        color: var(--mud-pallete-primary-text)
+        color: var(--mud-palette-appbar-text);
+    }
+
+    .app-background {
+        position: relative;
+        min-height: 100vh;
+        overflow: hidden;
+        background: radial-gradient(circle at 35% -15%, #588AB9 0%, #a7caeb 60%, #345397 100%);
     }
 </style>

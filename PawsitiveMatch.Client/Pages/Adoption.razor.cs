@@ -1,5 +1,3 @@
-using System.Reflection.Metadata.Ecma335;
-
 namespace PawsitiveMatch.Client.Pages
 {
     // Partial class definition needed for the Login page to detect the code
