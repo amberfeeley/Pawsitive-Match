@@ -1,5 +1,5 @@
 ﻿@inherits LayoutComponentBase
-
+@inject NavigationManager Nav
 <MudThemeProvider Theme="@_theme" />
 <MudPopoverProvider />
 <MudDialogProvider />
@@ -10,15 +10,15 @@
         <MudAppBar Elevation="1">
             <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
             
-            <MudButton Class="nav-link">Pawsitive Match</MudButton>
+            <MudButton Class="nav-link" OnClick="@NavToHome">Pawsitive Match</MudButton>
 
             <MudSpacer />
 
-            <MudButton Class="nav-link">Login</MudButton>
-            <MudButton Class="nav-link">My Account</MudButton>
+            <MudButton Class="nav-link" OnClick="@NavToLogin">Login</MudButton>
+            <MudButton Class="nav-link" OnClick="@NavToAccount">My Account</MudButton>
 
         </MudAppBar>
-        <MudDrawer id="nav-drawer" @bind-Open="_drawerOpen" ClipMode="DrawerClipMode.Always" Elevation="2">
+        <MudDrawer id="nav-drawer" @bind-Open="_drawerOpen" Style="background-color: rgb(229 238 246)" ClipMode="DrawerClipMode.Always" Elevation="2">
             <NavMenu />
         </MudDrawer>
         <MudMainContent Class="pt-16 pa-4">

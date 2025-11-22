@@ -31,7 +31,6 @@ namespace PawsitiveMatch.Client.Layout
             _isDarkMode = !_isDarkMode;
         }
 
-
         private readonly PaletteLight _lightPalette = new()
 
         {
@@ -78,5 +77,20 @@ namespace PawsitiveMatch.Client.Layout
             true => Icons.Material.Rounded.AutoMode,
             false => Icons.Material.Outlined.DarkMode,
         };
+
+        public void NavToHome()
+        {
+            Nav.NavigateTo("/");
+        }
+
+        public void NavToLogin()
+        {
+            Nav.NavigateTo("/login");
+        }
+
+        public void NavToAccount()
+        {
+            Nav.NavigateTo("/account");
+        }
     }
 }
