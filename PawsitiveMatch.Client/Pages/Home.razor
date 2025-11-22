@@ -9,16 +9,11 @@
         Adoptions
     </MudText>
 
-    <MudStack Row="true" Style="padding: 8px">
-        <MudButton OnClick="@(() => NavToPetType(PetType.Cat))">
-        Cats
-        </MudButton>
-        <MudButton OnClick="@(() => NavToPetType(PetType.Dog))">
-        Dogs
-        </MudButton>
-        <MudButton OnClick="@(() => NavToPetType(PetType.Other))">
-        Other
-        </MudButton>
+    <MudStack Row="true" Style="padding: 16px;">
+        @foreach (PetType pet in Enum.GetValues(typeof(PetType)))
+        {
+            <MudButton OnClick="(() => NavToPetType(pet))" Variant="Variant.Outlined" Style="margin: 8px;">@pet</MudButton>
+        }
     </MudStack>
 </div>
 <MudStack>
