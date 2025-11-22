@@ -1,53 +1,37 @@
+using MudBlazor;
+
 namespace PawsitiveMatch.Client.Pages
 {
-    // Partial class definition needed for the Login page to detect the code
     public partial class Login
     {
-        // Test variables
-        private string EmailValue { get; set; } = string.Empty;
-        private string PasswordValue { get; set; } = string.Empty;
-        private string ErrorMessage { get; set; } = string.Empty;
-        private string SuccessMessage { get; set; } = string.Empty;
+        private string EmailValue = string.Empty;
+        private string PasswordValue = string.Empty;
+        private string ErrorMessage = string.Empty;
+        private bool success;
+        private MudForm? form;
 
-        private void LoginSubmission()
+        private async Task LoginSubmission()
         {
-            // Sends error if all fields are empty
-            if (EmailValue == string.Empty && PasswordValue == string.Empty)
+            ErrorMessage = string.Empty;
+
+            if (form != null)
             {
-                ErrorMessage = "Both fields must be filled out to login.";
-                return;
+                await form.Validate();
+
+                if (form.IsValid)
+                {
+                    var user = await Api.LoginAsync(EmailValue, PasswordValue);
+                    if (user != null)
+                    {
+                        State.SetCurrentUser(user);
+                        Nav.NavigateTo("/");
+                    }
+                    else
+                    {
+                        ErrorMessage = "User not found";
+                    }
+                }
             }
-
-            // Sends error message if email field is blank
-            else if (EmailValue == string.Empty)
-            {
-                ErrorMessage = "The Email field cannot be blank on submission.";
-                return;
-            }
-
-            // Sends error message if password field is blank
-            else if (PasswordValue == string.Empty)
-            {
-                ErrorMessage = "The Password field cannot be blank upon submission.";
-                return;
-            }
-
-            // Clears email and password field upon button press. Temporary code.
-            else
-            {
-                ErrorMessage = string.Empty;
-                SuccessMessage = "Account creation was succesful! Please login to continue.";
-
-                EmailValue = string.Empty;
-                PasswordValue = string.Empty;
-            }
-
-            /*
-            Future additions:
-            Add admin button to either below create account
-            or footer
-            Add mudpaper into the form
-            */
         }
     }
 };
