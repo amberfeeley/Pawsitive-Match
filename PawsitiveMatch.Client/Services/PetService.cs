@@ -14,7 +14,16 @@ namespace PawsitiveMatch.Client.Services
 
         public async Task<List<Pet>> GetPetsByTypeAsync(PetType type)
         {
-            return await _http.GetFromJsonAsync<List<Pet>>($"api/pets/{type}");
+            try
+            {
+                var pets = await _http.GetFromJsonAsync<List<Pet>>($"api/pets/{type}");
+                return pets ?? new List<Pet>();
+            }
+            catch (HttpRequestException ex)
+            {
+                Console.Error.WriteLine($"GetPetsByTypeAsync failed: {ex.Message}");
+                return new List<Pet>();
+            }
         }
     }
 }
