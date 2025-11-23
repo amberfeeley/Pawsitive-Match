@@ -21,7 +21,7 @@ namespace PawsitiveMatch.Migrations
 
             MySqlModelBuilderExtensions.AutoIncrementColumns(modelBuilder);
 
-            modelBuilder.Entity("Admin", b =>
+            modelBuilder.Entity("PawsitiveMatch.SharedModels.Models.Admin", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -57,7 +57,7 @@ namespace PawsitiveMatch.Migrations
                     b.ToTable("Admin");
                 });
 
-            modelBuilder.Entity("AdoptionForm", b =>
+            modelBuilder.Entity("PawsitiveMatch.SharedModels.Models.AdoptionForm", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -101,7 +101,7 @@ namespace PawsitiveMatch.Migrations
                     b.ToTable("AdoptionForm");
                 });
 
-            modelBuilder.Entity("Pet", b =>
+            modelBuilder.Entity("PawsitiveMatch.SharedModels.Models.Pet", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -117,6 +117,12 @@ namespace PawsitiveMatch.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("varchar(50)");
 
+                    b.Property<string>("Description")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("ImagePath")
+                        .HasColumnType("longtext");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -125,10 +131,9 @@ namespace PawsitiveMatch.Migrations
                     b.Property<int?>("OwnerId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Species")
+                    b.Property<string>("Type")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("varchar(50)");
+                        .HasColumnType("longtext");
 
                     b.Property<int?>("UserId")
                         .HasColumnType("int");
@@ -140,7 +145,7 @@ namespace PawsitiveMatch.Migrations
                     b.ToTable("Pet");
                 });
 
-            modelBuilder.Entity("User", b =>
+            modelBuilder.Entity("PawsitiveMatch.SharedModels.Models.User", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -176,45 +181,45 @@ namespace PawsitiveMatch.Migrations
                     b.ToTable("User");
                 });
 
-            modelBuilder.Entity("AdoptionForm", b =>
+            modelBuilder.Entity("PawsitiveMatch.SharedModels.Models.AdoptionForm", b =>
                 {
-                    b.HasOne("Admin", null)
+                    b.HasOne("PawsitiveMatch.SharedModels.Models.Admin", null)
                         .WithMany("AdoptionForms")
                         .HasForeignKey("AdminId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Pet", null)
+                    b.HasOne("PawsitiveMatch.SharedModels.Models.Pet", null)
                         .WithMany("AdoptionForms")
                         .HasForeignKey("PetId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("User", null)
+                    b.HasOne("PawsitiveMatch.SharedModels.Models.User", null)
                         .WithMany("AdoptionForms")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Pet", b =>
+            modelBuilder.Entity("PawsitiveMatch.SharedModels.Models.Pet", b =>
                 {
-                    b.HasOne("User", null)
+                    b.HasOne("PawsitiveMatch.SharedModels.Models.User", null)
                         .WithMany("AdoptedPets")
                         .HasForeignKey("UserId");
                 });
 
-            modelBuilder.Entity("Admin", b =>
+            modelBuilder.Entity("PawsitiveMatch.SharedModels.Models.Admin", b =>
                 {
                     b.Navigation("AdoptionForms");
                 });
 
-            modelBuilder.Entity("Pet", b =>
+            modelBuilder.Entity("PawsitiveMatch.SharedModels.Models.Pet", b =>
                 {
                     b.Navigation("AdoptionForms");
                 });
 
-            modelBuilder.Entity("User", b =>
+            modelBuilder.Entity("PawsitiveMatch.SharedModels.Models.User", b =>
                 {
                     b.Navigation("AdoptedPets");
 
