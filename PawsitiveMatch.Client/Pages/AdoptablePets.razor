@@ -16,13 +16,15 @@
             @foreach (var pet in Pets)
             {
                 <MudItem xs="12" sm="6" md="4">
-                    <MudCard>
-                        <MudCardMedia Image="@(string.IsNullOrEmpty(pet.ImagePath) ? "/images/sample.jpg" : pet.ImagePath)" Height="300" />
-                        <MudCardContent>
-                            <MudText Typo="Typo.h6">@pet.Name</MudText>
-                            <MudText>@pet.Breed</MudText>
-                        </MudCardContent>
-                    </MudCard>
+                    <MudLink Href="@($"/pets/{PetType}/{pet.Id}")">
+                        <MudCard>
+                            <MudCardMedia Image="@(string.IsNullOrEmpty(pet.ImagePath) ? "/images/sample.jpg" : pet.ImagePath)" Height="300" />
+                            <MudCardContent>
+                                <MudText Typo="Typo.h6">@pet.Name</MudText>
+                                <MudText>@pet.Breed</MudText>
+                            </MudCardContent>
+                        </MudCard>
+                    </MudLink>
                 </MudItem>
             }
         }
