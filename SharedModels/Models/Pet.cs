@@ -15,6 +15,7 @@ namespace PawsitiveMatch.SharedModels.Models
         public int? OwnerId { get; set; }
         public bool Adopted { get; set; } = false;
         public List<AdoptionForm> AdoptionForms { get; set; } = [];
-        public string Image { get; set; }
+        public string? ImagePath { get; set; }
+        public string? Description { get; set; }
     }
 }

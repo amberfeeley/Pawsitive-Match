@@ -39,8 +39,8 @@ public class AppDbContext : DbContext
         {
             entity.HasMany(p => p.AdoptionForms).WithOne().HasForeignKey(p => p.PetId).IsRequired();
             entity.Property(p => p.Name).HasMaxLength(50).IsRequired();
-            entity.Property(p => p.Type).HasMaxLength(50).IsRequired();
             entity.Property(p => p.Breed).HasMaxLength(50).IsRequired();
+            entity.Property(p => p.Type).HasConversion<string>().IsRequired();
         });
 
         modelBuilder.Entity<AdoptionForm>(entity =>

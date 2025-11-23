@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using MudBlazor.Services;
 using PawsitiveMatch.Authentication;
+using PawsitiveMatch.Client.Services;
 using PawsitiveMatch.Components;
 using PawsitiveMatch.Services;
 
@@ -22,6 +23,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 
 builder.Services.AddScoped<AuthService>();
 builder.Services.AddScoped<StateService>();
+builder.Services.AddScoped<PetService>();
 builder.Services.AddControllers();
 builder.Services.AddAuthorizationCore();
 
@@ -47,6 +49,11 @@ using (var scope = app.Services.CreateScope())
 {
     var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
     dbContext.Database.Migrate();
+    if (!dbContext.Pet.Any())
+    {
+        dbContext.Pet.AddRange(PetsController.Pets);
+        dbContext.SaveChanges();
+    }
 }
 
 // Configure the HTTP request pipeline.
