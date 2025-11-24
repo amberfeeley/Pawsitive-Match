@@ -1,7 +1,11 @@
 @page "/pets/{PetTypeString}/{PetId:int}"
 @using PawsitiveMatch.Client.Services
+@using PawsitiveMatch.Client.Pages
+@using PawsitiveMatch.Services
 @inject PetService PetService
 @inject NavigationManager Nav
+@inject StateService State
+@inject ISnackbar Snackbar
 
 <MudContainer MaxWidth="MaxWidth.Medium"> 
 

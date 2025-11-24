@@ -1,4 +1,6 @@
 using Microsoft.AspNetCore.Components;
+using MudBlazor;
+using PawsitiveMatch.Services;
 using PawsitiveMatch.SharedModels.Models;
 
 namespace PawsitiveMatch.Client.Pages
@@ -17,10 +19,16 @@ namespace PawsitiveMatch.Client.Pages
 
         // Test class to ensure that the bind function works as intended.
         // Note that changes will be undone upon refreshing the page
-        private void CheckoutPet()
+        private async Task CheckoutPet()
         {
-            if (Pet != null)
-                Pet.Adopted = true;
+            if (State.CurrentUser == null)
+            {
+                Snackbar.Add("You must log in to adopt a pet. Please log in first before making an adoption request.", Severity.Error);
+            }
+            else
+            {
+                Snackbar.Add("Your adoption request has been placed into the cart!", Severity.Success);
+            }
         }
     }
 }
