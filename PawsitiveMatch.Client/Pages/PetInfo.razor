@@ -1,0 +1,42 @@
+@page "/pets/{PetTypeString}/{PetId:int}"
+@using PawsitiveMatch.Client.Services
+@using PawsitiveMatch.Client.Pages
+@using PawsitiveMatch.Services
+@inject PetService PetService
+@inject NavigationManager Nav
+@inject StateService State
+@inject ISnackbar Snackbar
+
+<MudContainer MaxWidth="MaxWidth.Medium"> 
+
+    <MudGrid>
+    @if (Pet == null)
+    {
+        <MudProgressCircular Indeterminate="true" />
+    }
+    else
+    {
+        <MudPaper Class="pa-4 mt-8" Elevation="3">
+            <MudText Typo="Typo.h2" Style="padding: 10px; text-align:center">@Pet.Name</MudText>
+            <MudText Style="padding-top: 2px; padding-bottom: 2px; text-align:center"><i>@Pet.Breed</i></MudText>
+
+            <div style="text-align:center; padding: 10px">
+                <MudButton OnClick="CheckoutPet" Style="background-color: #b7d1e9" Disabled="@(Pet.Adopted)"Size="Size.Large">Adopt Pet</MudButton>
+            </div>
+
+            <MudItem xs="12" Style="text-align:center">
+                <MudImage Src="@Pet.ImagePath" Alt="images/sample.jpg" Height="500" Class="rounded-lg"/>
+            </MudItem>
+
+            <MudPaper Class="pt-4 mt-4">
+                <MudText Typo="Typo.h6" Style="padding-left: 20px">About Me:</MudText>
+                <MudText Style="padding: 30px; padding-top: 10px">@Pet.Description</MudText>
+            </MudPaper>
+
+        </MudPaper>
+    }
+    </MudGrid>
+
+</MudContainer>
+    
+
