@@ -1,7 +1,66 @@
 @page "/account"
+@using PawsitiveMatch.Services
+@using PawsitiveMatch.SharedModels.Models
+@inject StateService State
+@inject NavigationManager Nav
 
 <MudContainer MaxWidth="MaxWidth.Medium">
-    <MudText Typo='Typo.h4'>My Account</MudText>
+    <MudPaper>
+        @if (State.CurrentUser == null)
+        {
+            <MudProgressCircular Indeterminate="true" />
+        }
+        else
+        {
+            <MudText Typo='Typo.h4' Style="padding: 10px; text-align:center">My Account</MudText>
 
-    <MudText Typo="Typo.body1">Sample text.</MudText>
+            <MudContainer Style="text-align:center">
+                <MudText Typo="Typo.h6">Welcome @State.CurrentUser?.FirstName @State.CurrentUser?.LastName!</MudText>
+                <MudText Typo="Typo.h6">Current Email: @State.CurrentUser?.Email</MudText>
+            </MudContainer>
+            
+            <MudContainer Style="text-align:center">
+                @if (@State.CurrentUser?.AdoptedPets?.Any() == true)
+                {
+                    var pets =State.CurrentUser.AdoptedPets;
+
+                    <MudText Typo="Typo.body1">These are the pets in your basket:</MudText>
+                    @foreach (var pet in pets)
+                        {
+                            <MudItem xs="12">
+                                    <MudCard class="pa-2" Style="margin-bottom 10px">
+
+                                        <MudCardContent Class = "d-flex align-center">
+                                            <MudImage src="@(string.IsNullOrEmpty(pet.ImagePath) ? "/images/sample.jpg" : pet.ImagePath)" 
+                                             Height="50" Size="50" Class="rounded-lg" Style="margin-right: 16px" />
+                                            <div>
+                                                <MudText Typo="Typo.h6">@pet.Name</MudText>
+                                                <MudText>@pet.Breed</MudText>
+                                            </div>
+                                        </MudCardContent>
+
+                                        <MudCardActions>
+                                            <MudButton OnClick="@(() => RemovePet(pet.Id))">Remove @pet.Name</MudButton>
+                                        </MudCardActions>
+
+
+                                    </MudCard>
+                            </MudItem>
+                        }
+
+                    <br />
+                    <MudButton>Checkout Pets</MudButton>
+                    <br />
+                }
+                else 
+                {   
+                    <MudNavLink href="/">Your basket is empty. Click here to find your new fluffy friend!</MudNavLink>
+                    <br />
+                }
+            </MudContainer>
+            
+            
+        }
+        
+    </MudPaper>
 </MudContainer>
