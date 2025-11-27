@@ -39,5 +39,13 @@ namespace PawsitiveMatch.Client.Pages
                 }
             }
         }
+
+        private async Task DeletePet()
+        {
+            if (await PetService.DeletePetAsync(PetId))
+            {
+                Nav.NavigateTo("/");
+            }
+        }
     }
 }

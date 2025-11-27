@@ -40,5 +40,43 @@ namespace PawsitiveMatch.Client.Services
                 return new Pet();
             }
         }
+
+
+        public async Task<bool> UploadPetAsync(string name, PetType petType, string breed, string? description)
+        {
+            try
+            {
+                var pet = new Pet
+                {
+                    Name = name,
+                    Type = petType,
+                    Breed = breed,
+                    Description = description
+                };
+                var response = await _http.PostAsJsonAsync("api/pets/upload-pet", pet);
+
+                return response.IsSuccessStatusCode;
+            }
+            catch (Exception ex)
+            {
+                Console.Error.WriteLine($"UploadPetAsync failed: {ex.Message}");
+                return false;
+            }
+        }
+
+        public async Task<bool> DeletePetAsync(int id)
+        {
+            try
+            {
+                var response = await _http.PostAsJsonAsync($"api/pets/delete-pet", id);
+
+                return response.IsSuccessStatusCode;
+            }
+            catch (Exception ex)
+            {
+                Console.Error.WriteLine($"DeletePetAsync failed: {ex.Message}");
+                return false;
+            }
+        }
     }
 }

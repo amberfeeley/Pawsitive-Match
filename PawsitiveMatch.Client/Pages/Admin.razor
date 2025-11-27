@@ -1,0 +1,33 @@
+@page "/admin"
+@using Microsoft.AspNetCore.Authorization
+@using PawsitiveMatch.Client.Services
+@using PawsitiveMatch.Services
+@using PawsitiveMatch.SharedModels.Models
+@attribute [Authorize(Roles = "Admin")]
+@inject PetService PetService
+@inject NavigationManager Nav
+
+@inject StateService StateService
+
+<MudPaper Class="pa-16 ma-2" Elevation="3">
+
+    <MudText Typo='Typo.h4'>Admin Panel</MudText>
+
+    <MudText Typo='Typo.h4'>Upload New Pet</MudText>
+    <MudForm @ref="form" @bind-IsValid="@success">
+
+            <MudTextField @bind-Value="name" Label="Name" Required="true" Variant="Variant.Text"/>
+
+            <MudSelect @bind-Value="petType" Label="Pet Type" Required="true">
+                @foreach (PetType pet in Enum.GetValues(typeof(PetType)))
+                {
+                    <MudSelectItem Value="pet">@pet</MudSelectItem>
+                }
+            </MudSelect>
+
+            <MudTextField @bind-Value="breed" Label="Pet Breed" Required="true" Variant="Variant.Text"/>
+            <MudTextField @bind-Value="description" Lines="10" Label="Pet Description" Required="true" Variant="Variant.Text"/>
+
+            <MudButton OnClick="UploadPet" Disabled="@(!success)">Upload Pet</MudButton>
+        </MudForm>
+</MudPaper>

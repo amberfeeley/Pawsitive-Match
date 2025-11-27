@@ -8,10 +8,21 @@ namespace PawsitiveMatch.Authentication
     {
         private readonly AppDbContext _db;
         private readonly PasswordHasher<User> _hasher = new();
-
+        public User Admin { get; private set; }
+        
         public AuthService(AppDbContext db)
         {
             _db = db;
+
+            Admin = new User
+            {
+                Email = "admin@admin.com",
+                FirstName = "Admin",
+                LastName = "Admin",
+                Role = "Admin"
+            };
+
+            Admin.Password = _hasher.HashPassword(Admin, "Admin123!");
         }
 
         public async Task<bool> RegisterUserAsync(string email, string password, string firstName, string lastName)
@@ -25,8 +36,7 @@ namespace PawsitiveMatch.Authentication
                 Password = "",
                 FirstName = firstName,
                 LastName = lastName,
-                AdoptedPets = [],
-                AdoptionForms = []
+                AdoptedPets = []
             };
             user.Password = _hasher.HashPassword(user, password);
 
