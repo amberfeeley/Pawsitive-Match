@@ -1,3 +1,6 @@
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity.Data;
 using Microsoft.AspNetCore.Mvc;
 using PawsitiveMatch.Authentication;
@@ -32,8 +35,29 @@ namespace PawsitiveMatch.Controllers
                 return Unauthorized();
             }
             
+            var claims = new List<Claim>
+            {
+                new Claim(ClaimTypes.NameIdentifier, dbUser.Id.ToString()),
+                new Claim(ClaimTypes.Name, dbUser.Email),
+                new Claim("firstName", dbUser.FirstName),
+                new Claim("lastName", dbUser.LastName),
+            };
+
+            var identity = new ClaimsIdentity(claims, "PawsitiveAuth");
+            var principal = new ClaimsPrincipal(identity);
+
+            await HttpContext.SignInAsync("PawsitiveAuth", principal);
+
             dbUser.Password = string.Empty;
             return Ok(dbUser);
+        }
+
+        [Authorize]
+        [HttpPost("logout")]
+        public async Task<IActionResult> Logout()
+        {
+            await HttpContext.SignOutAsync("PawsitiveAuth");
+            return Ok();
         }
     }
 }

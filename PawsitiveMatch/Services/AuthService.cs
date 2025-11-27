@@ -22,12 +22,13 @@ namespace PawsitiveMatch.Authentication
             var user = new User
             {
                 Email = email,
-                Password = _hasher.HashPassword(null, password),
+                Password = "",
                 FirstName = firstName,
                 LastName = lastName,
                 AdoptedPets = [],
                 AdoptionForms = []
             };
+            user.Password = _hasher.HashPassword(user, password);
 
             _db.User.Add(user);
             await _db.SaveChangesAsync();
@@ -42,7 +43,7 @@ namespace PawsitiveMatch.Authentication
                 return null;
             }
 
-            var result = _hasher.VerifyHashedPassword(null, user.Password, password);
+            var result = _hasher.VerifyHashedPassword(user, user.Password, password);
             return result == PasswordVerificationResult.Success ? user : null;
         }
     }
