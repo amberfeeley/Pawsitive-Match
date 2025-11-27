@@ -1,9 +1,12 @@
 using Microsoft.EntityFrameworkCore;
 using MudBlazor.Services;
 using PawsitiveMatch.Authentication;
+using PawsitiveMatch.Client.Pages;
 using PawsitiveMatch.Client.Services;
 using PawsitiveMatch.Components;
+using PawsitiveMatch.Controllers;
 using PawsitiveMatch.Services;
+using PawsitiveMatch.SharedModels.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,6 +25,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 );
 
 builder.Services.AddScoped<AuthService>();
+builder.Services.AddScoped<PetsService>();
 builder.Services.AddScoped<StateService>();
 builder.Services.AddScoped<PetService>();
 builder.Services.AddScoped<ApiService>();
@@ -66,6 +70,14 @@ using (var scope = app.Services.CreateScope())
     {
         dbContext.Pet.AddRange(PetsController.Pets);
         dbContext.SaveChanges();
+    }
+    
+    if (!await dbContext.User.AnyAsync(u => u.Email == "admin@admin.com"))
+    {
+        var authService = new AuthService(dbContext);
+
+        dbContext.User.Add(authService.Admin);
+        await dbContext.SaveChangesAsync();
     }
 }
 

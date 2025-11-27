@@ -10,6 +10,14 @@ namespace PawsitiveMatch.Services
         public User? CurrentUser => _currentUser;
         public bool IsLoggedIn => _currentUser != null;
 
+        public bool IsInitialized { get; private set; } = false;
+
+        public void MarkInitialized()
+        {
+            IsInitialized = true;
+            NotifyAuthenticationStateChanged(GetAuthenticationStateAsync());
+        }
+        
         public override Task<AuthenticationState> GetAuthenticationStateAsync()
         {
             ClaimsPrincipal principal;

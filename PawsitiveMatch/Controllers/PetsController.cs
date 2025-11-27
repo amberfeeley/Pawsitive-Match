@@ -1,6 +1,7 @@
-using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using PawsitiveMatch.Authentication;
 using PawsitiveMatch.SharedModels.Models;
 
 [ApiController]
@@ -59,11 +60,10 @@ public class PetsController : ControllerBase
         },
     };
 
-    private readonly AppDbContext _dbContext;
-
-    public PetsController(AppDbContext dbContext)
+    private readonly PetsService _petsService;
+    public PetsController(PetsService petsService)
     {
-        _dbContext = dbContext;
+        _petsService = petsService;
     }
 
 
@@ -75,13 +75,24 @@ public class PetsController : ControllerBase
             return BadRequest("Invalid pet type");
         }
 
-        var filteredPets = await _dbContext.Pet.Where(p => p.Type == petType).ToListAsync();
+        var filteredPets = await _petsService.GetPetsByTypeAsync(petType);
 
-        if (!filteredPets.Any())
-        {
-            return NotFound("No pets of this type found");
-        }
+        return filteredPets.Any() ? Ok(filteredPets) : NotFound("No pets of this type found");
+    }
 
-        return Ok(filteredPets);
+    [Authorize(Roles = "Admin")]
+    [HttpPost("delete-pet")]
+    public async Task<IActionResult> DeletePet([FromBody] int id)
+    {
+        bool success = await _petsService.DeletePetAsync(id);
+        return success ? Ok("Pet deleted successfully") : BadRequest("Cannot delete this pet");
+    }
+
+    [Authorize(Roles = "Admin")]
+    [HttpPost("upload-pet")]
+    public async Task<IActionResult> UploadPet([FromBody] Pet pet)
+    {
+        bool success = await _petsService.UploadPetAsync(pet.Name, pet.Type, pet.Breed, pet.Description);
+        return success ? Ok("Pet uploaded successfully") : Conflict("Pet with the same name already exists");
     }
 }

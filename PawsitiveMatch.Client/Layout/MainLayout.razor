@@ -17,18 +17,22 @@
             <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
             
             <MudButton Class="nav-link" OnClick="@NavToHome">Pawsitive Match</MudButton>
-
-            <MudSpacer />
-            @if (UserState.IsLoggedIn)
-            {
-                        <MudButton Class="nav-link" OnClick="@NavToAccount">My Account</MudButton>
-                        <MudButton Class="nav-link" OnClick="@Logout">Logout</MudButton>
-            }
-            else
-            {
-                        <MudButton Class="nav-link"  OnClick="@NavToLogin">Login</MudButton>
-                        <MudButton Class="nav-link" OnClick="@NavToCreateAccount">Create Account</MudButton>
-            }
+                <MudSpacer />
+                @if (UserState.IsLoggedIn && UserState.CurrentUser?.Role == "Admin")
+                {
+                    <MudButton OnClick="@(()=>Nav.NavigateTo("/admin"))">Admin Panel</MudButton>
+                }
+                
+                @if (UserState.IsLoggedIn)
+                {
+                            <MudButton Class="nav-link" OnClick="@NavToAccount">My Account</MudButton>
+                            <MudButton Class="nav-link" OnClick="@Logout">Logout</MudButton>
+                }
+                else
+                {
+                            <MudButton Class="nav-link"  OnClick="@NavToLogin">Login</MudButton>
+                            <MudButton Class="nav-link" OnClick="@NavToCreateAccount">Create Account</MudButton>
+                }
 
         </MudAppBar>
         <MudDrawer id="nav-drawer" @bind-Open="_drawerOpen" Style="background-color: rgb(229 238 246)" ClipMode="DrawerClipMode.Always" Elevation="2">
