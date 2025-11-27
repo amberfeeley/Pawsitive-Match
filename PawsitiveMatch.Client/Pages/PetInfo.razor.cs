@@ -30,5 +30,13 @@ namespace PawsitiveMatch.Client.Pages
                 Snackbar.Add("Your adoption request has been placed into the cart!", Severity.Success);
             }
         }
+
+        private async Task DeletePet()
+        {
+            if (await PetService.DeletePetAsync(PetId))
+            {
+                Nav.NavigateTo("/");
+            }
+        }
     }
 }

@@ -41,6 +41,7 @@ namespace PawsitiveMatch.Controllers
                 new Claim(ClaimTypes.Name, dbUser.Email),
                 new Claim("firstName", dbUser.FirstName),
                 new Claim("lastName", dbUser.LastName),
+                new Claim(ClaimTypes.Role, dbUser.Role)
             };
 
             var identity = new ClaimsIdentity(claims, "PawsitiveAuth");
@@ -58,6 +59,20 @@ namespace PawsitiveMatch.Controllers
         {
             await HttpContext.SignOutAsync("PawsitiveAuth");
             return Ok();
+        }
+
+        [Authorize]
+        [HttpGet("user")]
+        public IActionResult GetCurrentUser()
+        {
+            return Ok(new User
+            {
+                Id = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!),
+                Email = User.FindFirstValue(ClaimTypes.Name)!,
+                FirstName = User.FindFirstValue("firstName")!,
+                LastName = User.FindFirstValue("lastName")!,
+                Role = User.FindFirstValue(ClaimTypes.Role)!
+            });
         }
     }
 }

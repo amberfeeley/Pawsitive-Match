@@ -22,6 +22,10 @@
 
             <div style="text-align:center; padding: 10px">
                 <MudButton OnClick="CheckoutPet" Style="background-color: #b7d1e9" Disabled="@(Pet.Adopted)"Size="Size.Large">Adopt Pet</MudButton>
+                @if (State.CurrentUser != null && State.CurrentUser.Role == "Admin")
+                {
+                    <MudButton OnClick="DeletePet" Style="background-color: #b7d1e9; margin: 8px;" Size="Size.Large">Delete Pet</MudButton>
+                }
             </div>
 
             <MudItem xs="12" Style="text-align:center">
