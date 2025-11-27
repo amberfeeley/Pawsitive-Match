@@ -55,6 +55,18 @@ namespace PawsitiveMatch.Client.Services
                 return null;
             }
         }
+
+        public async Task LogoutAsync()
+        {
+            try
+            {
+                await _http.PostAsync("api/auth/logout", null);
+            }
+            catch (Exception ex)
+            {
+                Console.Error.WriteLine($"LogoutAsync failed: {ex.Message}");
+            }
+        }
     }
 
     internal class LoginRequestDto

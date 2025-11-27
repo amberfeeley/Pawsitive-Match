@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using MudBlazor.Services;
 using PawsitiveMatch.Client.Services;
@@ -13,6 +14,8 @@ builder.Services.AddScoped(sp => new HttpClient
 builder.Services.AddScoped<ApiService>();
 builder.Services.AddScoped<StateService>();
 builder.Services.AddScoped<PetService>();
+builder.Services.AddAuthorizationCore();
+builder.Services.AddScoped<AuthenticationStateProvider, StateService>();
 
 builder.Services.AddMudServices();
 

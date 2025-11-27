@@ -1,4 +1,5 @@
 using System.Runtime.InteropServices;
+using System.Threading.Tasks;
 using MudBlazor;
 
 namespace PawsitiveMatch.Client.Layout
@@ -91,6 +92,18 @@ namespace PawsitiveMatch.Client.Layout
         public void NavToAccount()
         {
             Nav.NavigateTo("/account");
+        }
+
+        public void NavToCreateAccount()
+        {
+            Nav.NavigateTo("/create-account");
+        }
+
+        public async Task Logout()
+        {
+            await Api.LogoutAsync();
+            UserState.Logout();
+            Nav.NavigateTo("/", true);
         }
     }
 }

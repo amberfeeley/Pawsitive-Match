@@ -30,7 +30,12 @@ namespace PawsitiveMatch.Client.Pages
 
                 if (form.IsValid && await Api.RegisterAsync(EmailValue, PasswordValue, FirstName, LastName))
                 {
-                    Nav.NavigateTo("/");
+                    var user = await Api.LoginAsync(EmailValue, PasswordValue);
+                    if (user != null)
+                    {
+                        State.SetCurrentUser(user);
+                        Nav.NavigateTo("/");
+                    }
                 }
                 else
                     ErrorMessage = "Email already exists!";

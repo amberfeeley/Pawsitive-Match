@@ -24,14 +24,15 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 builder.Services.AddScoped<AuthService>();
 builder.Services.AddScoped<StateService>();
 builder.Services.AddScoped<PetService>();
+builder.Services.AddScoped<ApiService>();
+
 builder.Services.AddControllers();
-builder.Services.AddAuthorizationCore();
 
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowBlazorClient", policy =>
     {
-        policy.AllowAnyOrigin()
+        policy.WithOrigins("https://localhost:5001/")
               .AllowAnyHeader()
               .AllowAnyMethod();
     });
@@ -41,7 +42,19 @@ builder.Services.AddScoped(sp => new HttpClient
 {
     BaseAddress = new Uri("https://localhost:5001/")
 });
-builder.Services.AddScoped<PawsitiveMatch.Client.Services.ApiService>();
+
+builder.Services.AddAuthentication("PawsitiveAuth")
+    .AddCookie("PawsitiveAuth", options =>
+    {
+        options.LoginPath = "/api/auth/login";
+        options.LogoutPath = "/api/auth/logout";
+        options.Cookie.Name = "PawsitiveAuthCookie";
+        options.Cookie.HttpOnly = true;
+        options.Cookie.SameSite = SameSiteMode.Strict;
+        options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+        options.ExpireTimeSpan = TimeSpan.FromHours(2);
+    });
+builder.Services.AddAuthorization();
 
 var app = builder.Build();
 
@@ -72,6 +85,8 @@ app.UseRouting();
 app.UseCors("AllowBlazorClient");
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
+app.UseAuthorization();
 app.UseAntiforgery();
 
 app.MapControllers();
