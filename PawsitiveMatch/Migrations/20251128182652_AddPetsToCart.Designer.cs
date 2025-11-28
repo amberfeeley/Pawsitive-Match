@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace PawsitiveMatch.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20251128175938_AddPetsToCart")]
+    [Migration("20251128182652_AddPetsToCart")]
     partial class AddPetsToCart
     {
         /// <inheritdoc />
