@@ -36,7 +36,8 @@ namespace PawsitiveMatch.Authentication
                 Password = "",
                 FirstName = firstName,
                 LastName = lastName,
-                AdoptedPets = []
+                AdoptedPets = [],
+                CartPets = []
             };
             user.Password = _hasher.HashPassword(user, password);
 
@@ -47,7 +48,7 @@ namespace PawsitiveMatch.Authentication
 
         public async Task<User?> LoginUserAsync(string email, string password)
         {
-            var user = await _db.User.FirstOrDefaultAsync(u => u.Email == email);
+            var user = await _db.User.Include(u => u.AdoptedPets).Include(u => u.CartPets).FirstOrDefaultAsync(u => u.Email == email);
             if (user == null)
             {
                 return null;

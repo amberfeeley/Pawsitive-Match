@@ -10,25 +10,19 @@ namespace PawsitiveMatch.Client.Pages
 
         private async Task CheckoutPets()
         {
-            if (State.CurrentUser != null)
+            if (State.CurrentUser != null && form != null)
             {
-                var pets = State.CurrentUser.AdoptedPets;
+                await form.Validate();
 
-                if (form != null)
+                if (form.IsValid)
                 {
-                    await form.Validate();
+                    await Api.AdoptPetsInCartAsync();
+                    State.CurrentUser.CartPets.Clear();
 
-                    if (form.IsValid)
-                    {
-                        // Update OwnerID of each pet to CurrentUserID
-                        // Each pet should have Adopted = true
-                        State.CurrentUser.AdoptedPets.Clear();
-                    }
+                    Snackbar.Add("Success! Please check your email for additional information.", Severity.Success);
+                    submitted = true;
+                    StateHasChanged();
                 }
-
-                Snackbar.Add("Success! Please check your email for additional information.", Severity.Success);
-                submitted = true;
-                StateHasChanged();
             }
             else
             {

@@ -20,6 +20,7 @@ namespace PawsitiveMatch.SharedModels.Models
         [MaxLength(255)]
         public string Password { get; set; } = string.Empty;
         public List<Pet> AdoptedPets { get; set; } = [];
+        public List<Pet> CartPets { get; set; } = [];
         [Required]
         [MaxLength(20)]
         public string Role { get; set; } = "User";

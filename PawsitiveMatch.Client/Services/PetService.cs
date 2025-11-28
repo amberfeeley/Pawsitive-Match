@@ -12,7 +12,7 @@ namespace PawsitiveMatch.Client.Services
             _http = http;
         }
 
-        public async Task<List<Pet>> GetPetsByTypeAsync(PetType type)
+        public async Task<List<Pet>?> GetPetsByTypeAsync(PetType type)
         {
             try
             {
@@ -26,21 +26,19 @@ namespace PawsitiveMatch.Client.Services
             }
         }
 
-        public async Task<Pet> GetPetByIDAndTypeAsync(int id, string type)
+        public async Task<Pet> GetPetByIdAsync(int id)
         {
             try
             {
-                var pets = await _http.GetFromJsonAsync<List<Pet>>($"api/pets/{type}");
-                var Pet = pets?.FirstOrDefault(p => p.Id == id);
-                return Pet ?? new Pet();
+                var pet = await _http.GetFromJsonAsync<Pet>($"api/pets/pet-{id}");
+                return pet ?? new Pet();
             }
             catch (HttpRequestException ex)
             {
-                Console.Error.WriteLine($"GetPetByIdAsync failed. {ex.Message}");
+                Console.Error.WriteLine($"GetPetByIdAsync failed: {ex.Message}");
                 return new Pet();
             }
         }
-
 
         public async Task<bool> UploadPetAsync(string name, PetType petType, string breed, string? description)
         {

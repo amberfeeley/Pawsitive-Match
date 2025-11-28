@@ -22,6 +22,14 @@ public class AppDbContext : DbContext
             entity.Property(u => u.LastName).HasMaxLength(50).IsRequired();
             entity.Property(u => u.Password).HasMaxLength(255).IsRequired();
             entity.Property(r => r.Role).HasMaxLength(20).IsRequired();
+            entity.HasMany(u => u.CartPets)
+              .WithOne()
+              .HasForeignKey(p => p.InCartOfUserId)
+              .OnDelete(DeleteBehavior.SetNull);
+            entity.HasMany(u => u.AdoptedPets)
+              .WithOne()
+              .HasForeignKey(p => p.OwnerId)
+              .OnDelete(DeleteBehavior.SetNull);
         });
 
         modelBuilder.Entity<Pet>(entity =>
@@ -31,10 +39,6 @@ public class AppDbContext : DbContext
             entity.Property(p => p.Name).HasMaxLength(50).IsRequired();
             entity.Property(p => p.Breed).HasMaxLength(50).IsRequired();
             entity.Property(p => p.Type).HasConversion<string>().IsRequired();
-            entity.HasOne<User>()
-              .WithMany(u => u.AdoptedPets)
-              .HasForeignKey(p => p.OwnerId)
-              .OnDelete(DeleteBehavior.SetNull);
         });
     }
 }

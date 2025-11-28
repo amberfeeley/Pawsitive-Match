@@ -14,7 +14,7 @@ namespace PawsitiveMatch.Client.Pages
 
         protected override async Task OnParametersSetAsync()
         {
-            Pet = await PetService.GetPetByIDAndTypeAsync(PetId, PetTypeString);
+            Pet = await PetService.GetPetByIdAsync(PetId);
         } 
 
         private async Task CheckoutPet()
@@ -27,13 +27,15 @@ namespace PawsitiveMatch.Client.Pages
             {
                 if (Pet != null)
                 {
-                    if (State.CurrentUser.AdoptedPets.Contains(Pet))
+                    if (State.CurrentUser.CartPets.Contains(Pet))
                     {
                         Snackbar.Add("This pet has already been placed into the cart!", Severity.Error);
                     }
                     else
                     {
-                        State.CurrentUser.AdoptedPets.Add(Pet);
+                        await Api.AddPetToCartAsync(Pet.Id);
+                        State.CurrentUser.CartPets.Add(Pet);
+
                         Snackbar.Add("Your adoption request has been placed into the cart!", Severity.Success);
                     }
                 }

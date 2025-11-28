@@ -1,7 +1,9 @@
 @page "/account"
+@using PawsitiveMatch.Client.Services
 @using PawsitiveMatch.Services
 @using PawsitiveMatch.SharedModels.Models
 @inject StateService State
+@inject ApiService Api
 @inject NavigationManager Nav
 
 <MudContainer MaxWidth="MaxWidth.Medium">
@@ -20,15 +22,15 @@
             </MudContainer>
             
             <MudContainer Style="text-align:center">
-                @if (@State.CurrentUser?.AdoptedPets?.Any() == true)
+                @if (State.CurrentUser?.CartPets?.Any() == true)
                 {
-                    var pets = State.CurrentUser.AdoptedPets;
+                    var pets = State.CurrentUser.CartPets;
 
                     <MudText Typo="Typo.body1">These are the pets in your basket:</MudText>
                     @foreach (var pet in pets)
                         {
                             <MudItem xs="12">
-                                    <MudCard class="pa-2" Style="margin-bottom 10px">
+                                    <MudCard class="pa-2" Style="margin-bottom: 10px">
 
                                         <MudCardContent Class = "d-flex align-center">
                                             <MudImage src="@(string.IsNullOrEmpty(pet.ImagePath) ? "/images/sample.jpg" : pet.ImagePath)" 
@@ -57,9 +59,29 @@
                     <br />
                 }
             </MudContainer>
-            
-            
         }
-        
     </MudPaper>
+
+    @if (State.CurrentUser != null && State.CurrentUser.AdoptedPets.Count > 0)
+    {
+        <MudPaper Style="margin-top: 10px; padding: 10px;">
+            <MudText Typo="Typo.h6">These are the pets you have adopted:</MudText>
+            @foreach (var pet in State.CurrentUser.AdoptedPets)
+            {
+                <MudItem xs="12">
+                    <MudCard class="pa-2" Style="margin-bottom: 10px">
+
+                        <MudCardContent Class = "d-flex align-center">
+                            <MudImage src="@(string.IsNullOrEmpty(pet.ImagePath) ? "/images/sample.jpg" : pet.ImagePath)" 
+                                Height="50" Class="rounded-lg" Style="margin-right: 16px" />
+                            <div>
+                                <MudText Typo="Typo.h6">@pet.Name</MudText>
+                                <MudText>@pet.Breed</MudText>
+                            </div>
+                        </MudCardContent>
+                    </MudCard>
+                </MudItem>
+            }
+        </MudPaper>
+        }
 </MudContainer>
