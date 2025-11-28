@@ -112,19 +112,15 @@ namespace PawsitiveMatch.Migrations
 
             modelBuilder.Entity("PawsitiveMatch.SharedModels.Models.Pet", b =>
                 {
-                    b.HasOne("PawsitiveMatch.SharedModels.Models.User", "InCartOfUser")
+                    b.HasOne("PawsitiveMatch.SharedModels.Models.User", null)
                         .WithMany("CartPets")
                         .HasForeignKey("InCartOfUserId")
                         .OnDelete(DeleteBehavior.SetNull);
 
-                    b.HasOne("PawsitiveMatch.SharedModels.Models.User", "Owner")
+                    b.HasOne("PawsitiveMatch.SharedModels.Models.User", null)
                         .WithMany("AdoptedPets")
                         .HasForeignKey("OwnerId")
                         .OnDelete(DeleteBehavior.SetNull);
-
-                    b.Navigation("InCartOfUser");
-
-                    b.Navigation("Owner");
                 });
 
             modelBuilder.Entity("PawsitiveMatch.SharedModels.Models.User", b =>

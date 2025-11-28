@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace PawsitiveMatch.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20251128053614_AddCartPets")]
-    partial class AddCartPets
+    [Migration("20251128175938_AddPetsToCart")]
+    partial class AddPetsToCart
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -115,19 +115,15 @@ namespace PawsitiveMatch.Migrations
 
             modelBuilder.Entity("PawsitiveMatch.SharedModels.Models.Pet", b =>
                 {
-                    b.HasOne("PawsitiveMatch.SharedModels.Models.User", "InCartOfUser")
+                    b.HasOne("PawsitiveMatch.SharedModels.Models.User", null)
                         .WithMany("CartPets")
                         .HasForeignKey("InCartOfUserId")
                         .OnDelete(DeleteBehavior.SetNull);
 
-                    b.HasOne("PawsitiveMatch.SharedModels.Models.User", "Owner")
+                    b.HasOne("PawsitiveMatch.SharedModels.Models.User", null)
                         .WithMany("AdoptedPets")
                         .HasForeignKey("OwnerId")
                         .OnDelete(DeleteBehavior.SetNull);
-
-                    b.Navigation("InCartOfUser");
-
-                    b.Navigation("Owner");
                 });
 
             modelBuilder.Entity("PawsitiveMatch.SharedModels.Models.User", b =>
