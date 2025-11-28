@@ -68,25 +68,6 @@ namespace PawsitiveMatch.Client.Services
             }
         }
 
-        public async Task<List<Pet>?> GetCartAsync()
-        {
-            try
-            {
-                var response = await _http.GetAsync("api/checkout");
-                if (!response.IsSuccessStatusCode)
-                {
-                    return null;
-                }
-
-                return await response.Content.ReadFromJsonAsync<List<Pet>>();
-            }
-            catch (Exception ex)
-            {
-                Console.Error.WriteLine($"GetCartAsync failed: {ex.Message}");
-                return null;
-            }
-        }
-
         public async Task<bool> AddPetToCartAsync(int petId)
         {
             try

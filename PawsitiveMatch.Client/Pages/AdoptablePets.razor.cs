@@ -17,7 +17,7 @@ namespace PawsitiveMatch.Client.Pages
                 return;
             }
             
-            Pets = await PetService.GetPetsByTypeAsync(PetType);
+            Pets = await PetService.GetPetsByTypeAsync(PetType) ?? [];
         }
     }
 }

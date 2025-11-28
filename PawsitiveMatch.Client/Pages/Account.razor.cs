@@ -9,7 +9,7 @@ namespace PawsitiveMatch.Client.Pages
             if (State.CurrentUser != null)
             {
                 await Api.RemovePetFromCartAsync(petId);
-                State.CurrentUser.AdoptedPets.RemoveAll(p => p.Id == petId);
+                State.CurrentUser.CartPets.RemoveAll(p => p.Id == petId);
 
                 StateHasChanged();
             }

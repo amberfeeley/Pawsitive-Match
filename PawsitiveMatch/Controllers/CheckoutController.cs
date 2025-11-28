@@ -23,14 +23,6 @@ namespace PawsitiveMatch.Controllers
             return int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
         }
 
-        [HttpGet]
-        public async Task<IActionResult> GetCart()
-        {
-            int userId = GetUserId();
-            var pets = await _checkout.GetCartAsync(userId);
-            return Ok(pets);
-        }
-
         [HttpPost("add/{petId}")]
         public async Task<IActionResult> AddPetToCart([FromBody] int petId)
         {

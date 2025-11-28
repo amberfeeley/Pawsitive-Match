@@ -60,27 +60,29 @@
                     <br />
                 }
             </MudContainer>
-            @if (State.CurrentUser.AdoptedPets.Count > 0)
-            {
-                <MudText Typo="Typo.body1">These are the pets you have adopted:</MudText>
-                foreach (var pet in State.CurrentUser.AdoptedPets)
-                {
-                    <MudItem xs="12">
-                        <MudCard class="pa-2" Style="margin-bottom: 10px">
-
-                            <MudCardContent Class = "d-flex align-center">
-                                <MudImage src="@(string.IsNullOrEmpty(pet.ImagePath) ? "/images/sample.jpg" : pet.ImagePath)" 
-                                    Height="50" Class="rounded-lg" Style="margin-right: 16px" />
-                                <div>
-                                    <MudText Typo="Typo.h6">@pet.Name</MudText>
-                                    <MudText>@pet.Breed</MudText>
-                                </div>
-                            </MudCardContent>
-                        </MudCard>
-                    </MudItem>
-                }
-            }
         }
-        
     </MudPaper>
+
+    @if (State.CurrentUser != null && State.CurrentUser.AdoptedPets.Count > 0)
+    {
+        <MudPaper Style="margin-top: 10px; padding: 10px;">
+            <MudText Typo="Typo.h6">These are the pets you have adopted:</MudText>
+            @foreach (var pet in State.CurrentUser.AdoptedPets)
+            {
+                <MudItem xs="12">
+                    <MudCard class="pa-2" Style="margin-bottom: 10px">
+
+                        <MudCardContent Class = "d-flex align-center">
+                            <MudImage src="@(string.IsNullOrEmpty(pet.ImagePath) ? "/images/sample.jpg" : pet.ImagePath)" 
+                                Height="50" Class="rounded-lg" Style="margin-right: 16px" />
+                            <div>
+                                <MudText Typo="Typo.h6">@pet.Name</MudText>
+                                <MudText>@pet.Breed</MudText>
+                            </div>
+                        </MudCardContent>
+                    </MudCard>
+                </MudItem>
+            }
+        </MudPaper>
+        }
 </MudContainer>

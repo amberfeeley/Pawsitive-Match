@@ -23,11 +23,11 @@ public class AppDbContext : DbContext
             entity.Property(u => u.Password).HasMaxLength(255).IsRequired();
             entity.Property(r => r.Role).HasMaxLength(20).IsRequired();
             entity.HasMany(u => u.CartPets)
-              .WithOne(p => p.InCartOfUser)
+              .WithOne()
               .HasForeignKey(p => p.InCartOfUserId)
               .OnDelete(DeleteBehavior.SetNull);
             entity.HasMany(u => u.AdoptedPets)
-              .WithOne(p => p.Owner)
+              .WithOne()
               .HasForeignKey(p => p.OwnerId)
               .OnDelete(DeleteBehavior.SetNull);
         });

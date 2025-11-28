@@ -13,11 +13,6 @@ namespace PawsitiveMatch.Authentication
             _db = db;
         }
 
-        public async Task<List<Pet>?> GetCartAsync(int userId)
-        {
-            return await _db.Pet.Where(u => u.InCartOfUserId == userId).ToListAsync();
-        }
-
         public async Task<bool> AddPetToCartAsync(int userId, int petId)
         {
             var pet = await _db.Pet.FirstOrDefaultAsync(p => p.Id == petId);
