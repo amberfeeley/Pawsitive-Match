@@ -76,6 +76,7 @@ namespace PawsitiveMatch.Authentication
                 pet.InCartOfUserId = null;
                 pet.Adopted = true;
                 user.AdoptedPets.Add(pet);
+                user.CartPets.Remove(pet);
             }
 
             await _db.SaveChangesAsync();
