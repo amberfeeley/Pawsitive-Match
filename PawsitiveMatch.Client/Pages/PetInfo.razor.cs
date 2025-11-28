@@ -17,8 +17,6 @@ namespace PawsitiveMatch.Client.Pages
             Pet = await PetService.GetPetByIDAndTypeAsync(PetId, PetTypeString);
         } 
 
-        // Test class to ensure that the bind function works as intended.
-        // Note that changes will be undone upon refreshing the page
         private async Task CheckoutPet()
         {
             if (State.CurrentUser == null)
@@ -27,7 +25,18 @@ namespace PawsitiveMatch.Client.Pages
             }
             else
             {
-                Snackbar.Add("Your adoption request has been placed into the cart!", Severity.Success);
+                if (Pet != null)
+                {
+                    if (State.CurrentUser.AdoptedPets.Contains(Pet))
+                    {
+                        Snackbar.Add("This pet has already been placed into the cart!", Severity.Error);
+                    }
+                    else
+                    {
+                        State.CurrentUser.AdoptedPets.Add(Pet);
+                        Snackbar.Add("Your adoption request has been placed into the cart!", Severity.Success);
+                    }
+                }
             }
         }
 

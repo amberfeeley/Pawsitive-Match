@@ -1,0 +1,51 @@
+@page "/checkout"
+@using PawsitiveMatch.Services
+@using PawsitiveMatch.SharedModels.Models
+@inject StateService State
+@inject NavigationManager Nav
+@inject ISnackbar Snackbar
+
+<MudContainer>
+    <MudPaper Class="pa-16 ma-2" Elevation="3">
+    @if (State.CurrentUser == null) {
+        <MudProgressCircular Indeterminate="true" />
+    }
+    else
+    {
+        if (!submitted)
+        {
+            var pets = State.CurrentUser.AdoptedPets;
+
+            <MudText Typo='Typo.h4' Style="padding: 10px; text-align:center">Adoption Form</MudText>
+
+            <MudForm @ref="form">
+                <MudPaper Style="margin-left: 18px">
+                <MudTextField @bind-Value="@State.CurrentUser.FirstName" Variant="Variant.Text" 
+                Label="First Name" Required="true" Disabled="true"  />
+                <MudTextField @bind-Value="@State.CurrentUser.LastName" Variant="Variant.Text" 
+                Label="Last Name" Required="true" Disabled="true"/>
+                <MudTextField @bind-Value="@State.CurrentUser.Email" Variant="Variant.Text" 
+                Label="Email" Required="true" Disabled="true"/>
+
+                @foreach(var pet in pets)
+                {          
+                    <MudTextField @bind-Value="pet.Id" Variant="Variant.Text" 
+                    Label="Pet ID" Required="true" Disabled="true"/>
+                    <MudTextField @bind-Value="pet.Name" Variant="Variant.Text" 
+                    Label="Pet Name" Required="true" Disabled="true"/>
+                    <MudTextField @bind-Value="pet.Type" Variant="Variant.Text" 
+                    Label="Pet Type" Required="true" Disabled="true"/>
+                    <MudTextField @bind-Value="pet.Breed" Variant="Variant.Text" 
+                    Label="Pet Breed" Required="true" Disabled="true"/>
+                }
+                </MudPaper>
+                
+                <MudButton OnClick="CheckoutPets">Confirm Adoption Form</MudButton>
+            </MudForm>
+        } else {
+            <MudNavLink href="/" Style="color: green">Thank you, we will contact you shortly! Click here to return.</MudNavLink>
+        }
+        
+    }
+    </MudPaper>
+</MudContainer>
