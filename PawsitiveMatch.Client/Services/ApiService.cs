@@ -67,6 +67,67 @@ namespace PawsitiveMatch.Client.Services
                 Console.Error.WriteLine($"LogoutAsync failed: {ex.Message}");
             }
         }
+
+        public async Task<List<Pet>?> GetCartAsync()
+        {
+            try
+            {
+                var response = await _http.GetAsync("api/checkout");
+                if (!response.IsSuccessStatusCode)
+                {
+                    return null;
+                }
+
+                return await response.Content.ReadFromJsonAsync<List<Pet>>();
+            }
+            catch (Exception ex)
+            {
+                Console.Error.WriteLine($"GetCartAsync failed: {ex.Message}");
+                return null;
+            }
+        }
+
+        public async Task<bool> AddPetToCartAsync(int petId)
+        {
+            try
+            {
+                var response = await _http.PostAsJsonAsync("api/checkout/add/{petId}", petId);
+                return response.IsSuccessStatusCode;
+            }
+            catch (Exception ex)
+            {
+                Console.Error.WriteLine($"AddPetToCartAsync failed: {ex.Message}");
+                return false;
+            }
+        }
+
+        public async Task<bool> RemovePetFromCartAsync(int petId)
+        {
+            try
+            {
+                var response = await _http.PostAsJsonAsync("api/checkout/remove/{petId}", petId);
+                return response.IsSuccessStatusCode;
+            }
+            catch (Exception ex)
+            {
+                Console.Error.WriteLine($"RemovePetFromCartAsync failed: {ex.Message}");
+                return false;
+            }
+        }
+
+        public async Task<bool> AdoptPetsInCartAsync()
+        {
+            try
+            {
+                var response = await _http.PostAsync("api/checkout/adopt", null);
+                return response.IsSuccessStatusCode;
+            }
+            catch (Exception ex)
+            {
+                Console.Error.WriteLine($"AdoptPetsInCartAsync failed: {ex.Message}");
+                return false;
+            }
+        }
     }
 
     internal class LoginRequestDto

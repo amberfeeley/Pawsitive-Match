@@ -14,9 +14,14 @@ namespace PawsitiveMatch.Authentication
         }
 
 
-        public async Task<List<Pet>> GetPetsByTypeAsync(PetType type)
+        public async Task<List<Pet>?> GetPetsByTypeAsync(PetType type)
         {
-            return await _db.Pet.Where(p => p.Type == type).ToListAsync();
+            return await _db.Pet.Where(p => p.Type == type && p.Adopted == false).ToListAsync();
+        }
+
+        public async Task<Pet?> GetPetsByIdAsync(int id)
+        {
+            return await _db.Pet.FirstOrDefaultAsync(p => p.Id == id && p.Adopted == false);
         }
 
         public async Task<bool> DeletePetAsync(int id)

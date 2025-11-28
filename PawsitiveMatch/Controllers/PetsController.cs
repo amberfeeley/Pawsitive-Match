@@ -68,7 +68,7 @@ public class PetsController : ControllerBase
 
 
     [HttpGet("{type}")]
-    public async Task<ActionResult<List<Pet>>> GetPetsByType(string type)
+    public async Task<ActionResult<List<Pet>>?> GetPetsByType(string type)
     {
         if (!Enum.TryParse<PetType>(type, true, out var petType))
         {
@@ -77,7 +77,15 @@ public class PetsController : ControllerBase
 
         var filteredPets = await _petsService.GetPetsByTypeAsync(petType);
 
-        return filteredPets.Any() ? Ok(filteredPets) : NotFound("No pets of this type found");
+        return filteredPets != null ? Ok(filteredPets) : NotFound("No pets of this type found");
+    }
+
+    [HttpGet("pet-{id}")]
+    public async Task<ActionResult<List<Pet>>?> GetPetsById(int id)
+    {
+        var pet = await _petsService.GetPetsByIdAsync(id);
+
+        return pet != null ? Ok(pet) : NotFound("No pets found with this id");
     }
 
     [Authorize(Roles = "Admin")]

@@ -7,9 +7,9 @@
     <MudText Typo="Typo.h4" Style="padding: 16px">@(PetType)s for Adoption</MudText>
 
     <MudGrid>
-        @if (Pets == null)
+        @if (Pets == null || Pets.Count == 0)
         {
-            <MudProgressCircular Indeterminate="true" />
+            <MudText Typo="Typo.subtitle1" Style="padding: 16px">Adoptable @(PetType.ToString().ToLower())s coming soon!</MudText>
         }
         else
         {

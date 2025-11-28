@@ -4,11 +4,13 @@ namespace PawsitiveMatch.Client.Pages
 {
     public partial class Account
     {
-        private void RemovePet(int petId)
+        private async Task RemovePet(int petId)
         {
             if (State.CurrentUser != null)
             {
+                await Api.RemovePetFromCartAsync(petId);
                 State.CurrentUser.AdoptedPets.RemoveAll(p => p.Id == petId);
+
                 StateHasChanged();
             }
 

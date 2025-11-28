@@ -1,7 +1,9 @@
 @page "/checkout"
+@using PawsitiveMatch.Client.Services
 @using PawsitiveMatch.Services
 @using PawsitiveMatch.SharedModels.Models
 @inject StateService State
+@inject ApiService Api
 @inject NavigationManager Nav
 @inject ISnackbar Snackbar
 
@@ -14,7 +16,7 @@
     {
         if (!submitted)
         {
-            var pets = State.CurrentUser.AdoptedPets;
+            var pets = State.CurrentUser.CartPets;
 
             <MudText Typo='Typo.h4' Style="padding: 10px; text-align:center">Adoption Form</MudText>
 
