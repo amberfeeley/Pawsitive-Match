@@ -3,6 +3,11 @@
 
 This project was created for educational purposes and is part of a learning exercise / school assignment. It may not be production-ready and is intended for personal or academic exploration only.
 
+# Requirements
+* .NET SDK 9.0 or higher is required
+* C# Dev Kit is needed to run the application from Visual Studio Code
+* A MySQL database with default settings is required 
+
 # Run Instructions
 1. Ensure that your MySQL is running with default port/username/password.
 2. Open backend project in terminal (`cd PawsitiveMatch`)
