@@ -17,6 +17,7 @@ namespace PawsitiveMatch.Client.Pages
                 if (form.IsValid)
                 {
                     await Api.AdoptPetsInCartAsync();
+                    State.CurrentUser.AdoptedPets.AddRange(State.CurrentUser.CartPets);
                     State.CurrentUser.CartPets.Clear();
 
                     Snackbar.Add("Success! Please check your email for additional information.", Severity.Success);
